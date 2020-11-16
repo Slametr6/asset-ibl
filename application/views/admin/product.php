@@ -112,7 +112,13 @@
 								</div>
 								<div class="form-group">
 									<label>Vendor Name</label>
-									<input class="form-control" type="text" name="vendor_name" id="vendor_name" placeholder="Vendor Name" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="">Select...</option>
+										<?php foreach($vendor as $ven):?>
+										<option value="<?= $ven->name;?>"><?= $ven->name;?></option>
+										<?php endforeach;?>
+									</select>
+									<!-- <input class="form-control" type="text" name="vendor_name" id="vendor_name" placeholder="Vendor Name" required> -->
 								</div>
 								<div class="form-group">
 									<label>Price</label>
@@ -171,7 +177,13 @@
 								</div>
 								<div class="form-group">
 									<label>Vendor</label>
-									<input class="form-control" type="text" name="vendor_name" id="vendor_name" placeholder="Vendor" value="<?= $val->vendor_name;?>" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="<?= $val->vendor_name;?>"><?= $val->vendor_name;?></option>
+										<?php foreach($vendor as $ven):?>
+										<option value="<?= $ven->name;?>"><?= $ven->name;?></option>
+										<?php endforeach;?>
+									</select>
+									<!-- <input class="form-control" type="text" name="vendor_name" id="vendor_name" placeholder="Vendor" value="<?= $val->vendor_name;?>" required> -->
 								</div>
 								<div class="form-group">
 									<label>Price</label>

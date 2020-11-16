@@ -18,6 +18,7 @@ class Product extends CI_Controller {
 				$data['title'] = 'Product Managements';
 				$data['user'] = $user;
 				$data['product'] = $this->m_product->getProduct();
+				$data['vendor'] = $this->m_vendor->getVendor();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
