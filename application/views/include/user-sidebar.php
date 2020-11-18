@@ -30,13 +30,13 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview"><a href="<?= base_url('user');?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
+						<li><a href="<?= base_url('product');?>"><i class="fa fa-list"></i> <span>Product</span></a></li>
 						<li class="treeview">
               <a href="#">
                 <i class="fa fa-book"></i> <span>Master Asset</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?= base_url('product');?>"><i class="fa fa-circle-o"></i> Products</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Assets</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> User Assets</a></li>
               </ul>

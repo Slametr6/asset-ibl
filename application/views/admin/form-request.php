@@ -74,7 +74,7 @@
 									<i class="fa fa-trash"></i></a>
 								</button>
 								<button class="item" title="Return" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
-									<i class="fa fa-exchange"></i>
+									<i class="fa fa-refresh"></i>
 								</button>
 							</div>
 						</td>
@@ -115,11 +115,23 @@
 								</div>
 								<div class="form-group">
 									<label>Product Name</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="">Select...</option>
+										<?php foreach($products as $prod):?>
+										<option value="<?= $prod->name;?>"><?= $prod->name;?></option>
+										<?php endforeach;?>
+									</select>
+									<!-- <input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" required> -->
 								</div>
 								<div class="form-group">
 									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="">Select...</option>
+										<?php foreach($products as $prod):?>
+										<option value="<?= $prod->description;?>"><?= $prod->description;?></option>
+										<?php endforeach;?>
+									</select>
+									<!-- <input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" required> -->
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
@@ -182,11 +194,23 @@
 								</div>
 								<div class="form-group">
 									<label>Product Name</label>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="<?= $val->product_name;?>"><?= $val->product_name;?></option>
+										<?php foreach($products as $prod):?>
+										<option value="<?= $prod->name;?>"><?= $prod->name;?></option>
+										<?php endforeach;?>
+									</select>
 									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" value="<?= $val->product_name;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" value="<?= $val->spec;?>" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="<?= $val->spec;?>"><?= $val->spec;?></option>
+										<?php foreach($products as $prod):?>
+										<option value="<?= $prod->description;?>"><?= $prod->description;?></option>
+										<?php endforeach;?>
+									</select>
+									<!-- <input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" value="<?= $val->spec;?>" required> -->
 								</div>
 								<div class="form-group">
 									<label>Brand</label>

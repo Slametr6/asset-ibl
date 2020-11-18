@@ -42,6 +42,7 @@
 						<th>Type</th>
 						<th>Brand</th>
 						<th>Name</th>
+						<th>Description</th>
 						<th>Vendor</th>
 						<th>Price</th>
 						<th>Qty</th>
@@ -56,8 +57,9 @@
 						<td><?= $val->type;?></td>
 						<td><?= $val->brand;?></td>
 						<td><?= $val->name;?></td>
+						<td><?= $val->description;?></td>
 						<td><?= $val->vendor_name;?></td>
-						<td><?= $val->price;?></td>
+						<td><?= rupiah($val->price);?></td>
 						<td><?= $val->qty;?></td>
 						<td><?= date('d-m-Y', strtotime($val->date_in));?></td>
 						<td>
@@ -111,6 +113,10 @@
 									<input class="form-control" type="text" name="name" id="name" placeholder="Name" required>
 								</div>
 								<div class="form-group">
+									<label>Description</label>
+									<input class="form-control" type="text" name="description" id="description" placeholder="Description" required>
+								</div>
+								<div class="form-group">
 									<label>Vendor Name</label>
 									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
 										<option value="">Select...</option>
@@ -118,7 +124,6 @@
 										<option value="<?= $ven->name;?>"><?= $ven->name;?></option>
 										<?php endforeach;?>
 									</select>
-									<!-- <input class="form-control" type="text" name="vendor_name" id="vendor_name" placeholder="Vendor Name" required> -->
 								</div>
 								<div class="form-group">
 									<label>Price</label>
@@ -176,6 +181,10 @@
 									<input class="form-control" type="text" name="name" id="name" placeholder="Name" value="<?= $val->name;?>" required>
 								</div>
 								<div class="form-group">
+									<label>Description</label>
+									<input class="form-control" type="text" name="description" id="description" placeholder="Description" value="<?= $val->description;?>" required>
+								</div>
+								<div class="form-group">
 									<label>Vendor</label>
 									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
 										<option value="<?= $val->vendor_name;?>"><?= $val->vendor_name;?></option>
@@ -183,7 +192,6 @@
 										<option value="<?= $ven->name;?>"><?= $ven->name;?></option>
 										<?php endforeach;?>
 									</select>
-									<!-- <input class="form-control" type="text" name="vendor_name" id="vendor_name" placeholder="Vendor" value="<?= $val->vendor_name;?>" required> -->
 								</div>
 								<div class="form-group">
 									<label>Price</label>

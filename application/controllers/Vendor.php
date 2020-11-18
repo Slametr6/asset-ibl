@@ -34,6 +34,7 @@ class Vendor extends CI_Controller {
 	public function addVendor()
 	{
 		$this->form_validation->set_rules('vendor_code', 'Vendor_code', 'trim|required|is_unique[vendors.vendor_code]');
+		
 		if($this->form_validation->run() == false) {
 			$this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Vendor code must be unique!</div>');
 			redirect('vendor');

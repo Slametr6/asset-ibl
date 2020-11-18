@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Product extends CI_Controller {
+class Asset extends CI_Controller {
 
 	public function index()
 	{
@@ -14,26 +14,29 @@ class Product extends CI_Controller {
 			
 		} else {
 			if ($user['role_id'] == 1) {
-				$data['menu'] = 'product';
-				$data['title'] = 'Product Managements';
+				$data['menu'] = 'asset';
+				$data['title'] = 'Asset Managements';
 				$data['user'] = $user;
+				$data['asset'] = $this->m_asset->getAsset();
 				$data['product'] = $this->m_product->getProduct();
 				$data['vendor'] = $this->m_vendor->getVendor();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
-				$this->load->view('admin/product', $data);
+				$this->load->view('admin/asset', $data);
 				$this->load->view('include/footer');
 				
 			} else {
-				$data['menu'] = 'product';
-				$data['title'] = 'Product Managements';
+				$data['menu'] = 'asset';
+				$data['title'] = 'Asset Managements';
 				$data['user'] = $user;
+				$data['asset'] = $this->m_asset->getAsset();
 				$data['product'] = $this->m_product->getProduct();
-		
+				$data['vendor'] = $this->m_vendor->getVendor();
+				
 				$this->load->view('include/header', $data);
 				$this->load->view('include/user-sidebar', $data);
-				$this->load->view('user/product', $data);
+				$this->load->view('user/asset', $data);
 				$this->load->view('include/footer');
 			}
 		}
@@ -93,4 +96,4 @@ class Product extends CI_Controller {
 
 }
 
-/* End of file Controllername.php */
+/* End of file Asset.php */
