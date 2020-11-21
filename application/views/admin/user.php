@@ -34,7 +34,7 @@
 					</div>
                 </div><!-- /.box-header -->
 				<?= $this->session->userdata('message');?>
-                <div class="box-body">
+                <div class="box-body table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -45,10 +45,10 @@
 						<th>Is active</th>
 						<th>Email</th>
 						<th>Phone</th>
-						<th>Address</th>
+						<th width="200px">Address</th>
 						<th>Department</th>
 						<th>Position</th>
-						<th>Action</th>
+						<th width="80px">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,7 @@
 					  <tr>
 						<td><?= $val->name;?></td>
 						<td><?= $val->username;?></td>
-						<td><img width="25%" src="<?= base_url('assets/images/profile/'). $val->image;?>" /></td>
+						<td><img width="80%" src="<?= base_url('assets/images/profile/'). $val->image;?>" /></td>
 						<td><?= $val->role_id;?></td>
 						<td><?= $val->is_active;?></td>
 						<td><?= $val->email;?></td>
@@ -66,12 +66,16 @@
 						<td><?= $val->position;?></td>
 						<td>
 							<div class="table-data-feature">
-								<button class="item" title="Edit" data-toggle="modal" data-target="#editUserModal<?= $val->id;?>">
+								<button class="item" title="Edit" data-toggle="modal" data-target="#editUserModal<?= $val->id;?>" >
 									<i class="fa fa-pencil"></i>
 								</button>
-								<button  class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('admin/deluser/'. $val->id);?>')">
+								<button class="item" data-toggle="tooltip" title="Delete">
+									<a href="#!" onclick="deleteConfirm('<?= base_url('admin/deluser/'. $val->id);?>')" >
 									<i class="fa fa-trash"></i></a>
+								</button>
+								<button class="item" data-toggle="tooltip" title="Reset">
+									<a href="#!" onclick="resetPassword('<?= base_url('admin/resetPassword/'. $val->id);?>')" >
+									<i class="fa fa-key"></i></a>
 								</button>
 							</div>
 						</td>
@@ -88,7 +92,7 @@
 	  
 		<!-- modal addUser -->
 		<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModal" aria-hidden="true">
-			<div class="modal-dialog modal-md" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -131,7 +135,7 @@
 		<?php $no = 0;
 			foreach($data as $val): $no++;?>
 		<div class="modal fade" id="editUserModal<?= $val->id;?>" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
-			<div class="modal-dialog modal-md" role="document">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -139,15 +143,26 @@
 					</div>
 					<div class="modal-body">
 						<div class="login-form">
-							<form action="<?= base_url('admin/edituser');?>" method="post">
+							<?= form_open_multipart('admin/edituser');?>
 								<input type="hidden" name="id" id="id" value="<?= $val->id;?>" >
 								<div class="form-group">
 									<label>Name</label>
 									<input class="form-control" type="text" name="name" id="name" placeholder="Full Name" value="<?= $val->name;?>" >
 								</div>
 								<div class="form-group">
-									<label>User Name</label>
-									<input class="form-control" type="text" name="username" id="username" placeholder="User Name" value="<?= $val->username;?>" readonly>
+									<label>Username</label>
+									<input class="form-control" type="text" name="username" id="username" placeholder="Username" value="<?= $val->username;?>" readonly >
+								</div>
+								<div class="form-group">
+									<div class="col-sm"> <label>Picture</label></div>
+									<div class="col-sm">
+										<img src="<?= base_url('assets/images/profile/').$val->image;?>" class="img-thumbnail" width="150px" hight="150px" >
+									</div>
+									<div class="col-sm">
+										<div class="custom-file">
+										<input type="file" class=" form-control custom-file-input" id="image" name="image">
+										</div>
+									</div>
 								</div>
 								<div class="form-group">
 									<label>Email</label>

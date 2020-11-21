@@ -17,10 +17,11 @@ class Admin extends CI_Controller {
 				$data['menu'] = 'admin';
 				$data['title'] = 'Admin Profile';
 				$data['user'] = $user;
+				$data['data'] = $this->db->get('users')->result();
 				
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
-				$this->load->view('admin/index', $data);
+				$this->load->view('admin/profile', $data);
 				$this->load->view('include/footer'); 
 				
 			} else {
@@ -81,6 +82,8 @@ class Admin extends CI_Controller {
 
 	public function editUser()
 	{
+		$username = $this->session->userdata('username');
+		$user = $this->db->get_where('users', ['username' => $username])->row_array();
 		$this->form_validation->set_rules('name', 'Full name', 'trim|required');
 		
 		if ($this->form_validation->run() == FALSE) {
@@ -88,15 +91,16 @@ class Admin extends CI_Controller {
 
 		} else {
 			$upload_img = $_FILES['image']['name'];
+
 			if ($upload_img) {
-				$config['upload_path'] = '.assets/images/profile/';
-				$config['allowed_type'] = 'gif|jpg|png';
+				$config['upload_path'] = 'assets/images/profile/';
+				$config['allowed_types'] = 'jpg|gif|png|jpeg|JPG|PNG';
 				$config['max_size'] = '1024';
 
 				$this->load->library('upload', $config);
 				if ($this->upload->do_upload('image')) {
-					$def_img = $data['user']['image'];
-					if ($def_img) {
+					$def_img = $user['image'];
+					if ($def_img != 'avatar.png') {
 						unlink(FCPATH.'assets/images/profile/'.$def_img);
 					}
 					$new_img = $this->upload->data('file_name');
@@ -115,11 +119,11 @@ class Admin extends CI_Controller {
 				'dept' => htmlspecialchars($this->input->post('dept', TRUE)),
 				'position' => htmlspecialchars($this->input->post('position', TRUE)),
 				'updatedat' => date('Y-m-d'),
-				'updatedby' => $this->session->userdata('username')
+				'updatedby' => $username
 			];
 			$id = $this->input->post('id');
-			$this->db->update('users', $data, ['id' => $id]);
-					
+			$this->db->update('users', $data, ['id' => $id]);			
+			
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User updated successfully!</div>');
 			redirect('admin/user');
 		}
@@ -129,9 +133,153 @@ class Admin extends CI_Controller {
 	public function delUser($id)
 	{	
 		$this->db->delete('users', ['id' => $id]);
-
+		
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User deleted successfully!</div>');
 		redirect('admin/user');
 	}
+	
+	public function editProfile()
+	{
+		$username = $this->session->userdata('username');
+		$user = $this->db->get_where('users', ['username' => $username])->row_array();
+		$this->form_validation->set_rules('name', 'Full name', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('admin');
 
+		} else {
+			$upload_img = $_FILES['image']['name'];
+
+			if ($upload_img) {
+				$config['upload_path'] = 'assets/images/profile/';
+				$config['allowed_types'] = 'jpg|gif|png|jpeg|JPG|PNG';
+				$config['max_size'] = '1024';
+
+				$this->load->library('upload', $config);
+				if ($this->upload->do_upload('image')) {
+					$def_img = $user['image'];
+					if ($def_img != 'avatar.png') {
+						unlink(FCPATH.'assets/images/profile/'.$def_img);
+					}
+					$new_img = $this->upload->data('file_name');
+					$this->db->set('image', $new_img);
+
+				} else {
+					echo $this->upload->display_errors();
+				}
+			}
+			$data = [
+				'name' => htmlspecialchars($this->input->post('name', TRUE)),
+				'username' => htmlspecialchars($this->input->post('username', TRUE)),
+				'email' => htmlspecialchars($this->input->post('email', TRUE)),
+				'phone' => htmlspecialchars($this->input->post('phone', TRUE)),
+				'address' => htmlspecialchars($this->input->post('address', TRUE)),
+				'dept' => htmlspecialchars($this->input->post('dept', TRUE)),
+				'position' => htmlspecialchars($this->input->post('position', TRUE)),
+				'updatedat' => date('Y-m-d'),
+				'updatedby' => $username
+			];
+			$id = $this->input->post('id');
+			$this->db->update('users', $data, ['id' => $id]);			
+			
+			if($user['role_id'] == 1) {
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile updated successfully!</div>');
+				redirect('admin');
+
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile updated successfully!</div>');
+				redirect('user');
+			}
+		}
+	}
+
+	public function changePassword()
+	{
+		$username = $this->session->userdata('username');
+		$user = $this->db->get_where('users', ['username' => $username])->row_array();
+		
+		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required');
+		$this->form_validation->set_rules('new_password1', 'New Password', 'trim|required|min_length[4]|matches[new_password2]');
+		$this->form_validation->set_rules('new_password2', 'Confirm Password', 'trim|required|matches[new_password1]');
+		
+		if ($this->form_validation->run() == FALSE) {
+			if($user['role_id'] == 1) {
+				redirect('admin');
+
+			} else {
+				redirect('user');
+			}
+
+		} else {
+			$current_password = $this->input->post('current_password');
+			$new_password = $this->input->post('new_password1');
+			if (!password_verify($current_password, $user['password'])) {
+				if($user['role_id'] == 1) {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+					redirect('admin');
+	
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+					redirect('user');
+				}
+
+			} else {
+				// password tidak boleh sama
+				if ($current_password == $new_password) {
+					if($user['role_id'] == 1) {
+						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password must be diferent from current password!</div>');
+						redirect('admin');
+		
+					} else {
+						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password must be diferent from current password!</div>');
+						redirect('user');
+					}
+
+				} else {
+					$password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+					$password = $this->input->post('password', $password_hash);
+
+					$this->db->set('password', $password_hash)
+								->where('username', $username)
+								->update('users');
+
+					if($user['role_id'] == 1) {
+						$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed successfully</div>');
+						redirect('admin');
+
+					} else {
+						$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed successfully</div>');
+						redirect('user');
+					}
+
+				}
+			}
+		}
+		
+	}
+
+	public function resetPassword()
+	{
+		$username = $this->session->userdata('username');
+		$user = $this->db->get_where('users', ['username' => $username])->row_array();
+
+		$this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[5]|matches[password2]');
+		$this->form_validation->set_rules('password2', 'Repeat Password', 'trim|required|min_length[5]|matches[password1]');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password failed to reset!</div>');
+			redirect('admin/user');
+			
+		} else {
+			$password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+
+			$this->db->set('password', $password)
+						->where('username', $username)
+						->update('users');
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password has been reseted!</div>');
+			redirect('admin/user');
+
+		}
+	}
 }

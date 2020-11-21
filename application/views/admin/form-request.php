@@ -34,7 +34,7 @@
 					</div>
                 </div><!-- /.box-header -->
 				<?= $this->session->userdata('message');?>
-                <div class="box-body">
+                <div class="box-body table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -48,7 +48,7 @@
 						<th>Allocation</th>
 						<th>Note</th>
 						<th>Is approved</th>
-						<th>Action</th>
+						<th width="70px">Action</th>
                       </tr>
                     </thead>
                     <tbody>

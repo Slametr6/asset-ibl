@@ -14,8 +14,8 @@
                   <span class="hidden-xs"><?= $user['username'];?></span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="#">
-										<a href="#" ><i class="fa fa-cog"></i> Profile</a>
+                  <li class="dropdown">
+										<a href="#!" onclick="changePassword('<?= base_url('admin/changePassword/'. $user['id']);?>')" ><i class="fa fa-key"></i> Change Password</a>
 										<a href="<?= base_url('auth/logout');?>" ><i class="fa fa-power-off"></i> Sign out</a>
                   </li>
                 </ul>
@@ -29,7 +29,7 @@
         <section class="sidebar">
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview"><a href="<?= base_url('admin');?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
+            <li class="active treeview"><a href="<?= base_url('admin');?>"><i class="fa fa-dashboard"></i> <span>Profile</span></i></a></li>
 						<li><a href="<?= base_url('vendor');?>"><i class="fa fa-th"></i> <span>Vendor</span></a></li>
 						<li><a href="<?= base_url('product');?>"><i class="fa  fa-list"></i> <span>Product</span></a></li>
 						<li class="treeview">
