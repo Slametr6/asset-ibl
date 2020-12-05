@@ -18,7 +18,6 @@ class Request extends CI_Controller {
 				$data['title'] = 'Form Request Managements';
 				$data['user'] = $user;
 				$data['request'] = $this->m_request->getRequest();
-				$data['products'] = $this->m_product->getProduct();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
@@ -30,7 +29,6 @@ class Request extends CI_Controller {
 				$data['title'] = 'Form Request Managements';
 				$data['user'] = $user;
 				$data['request'] = $this->m_request->getRequest();
-				$data['products'] = $this->m_product->getProduct();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/user-sidebar', $data);

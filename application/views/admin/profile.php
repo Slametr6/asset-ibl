@@ -26,12 +26,9 @@
 								</div>
 								<div class="col-xs-8">
 									<div class="card-body">
-										<h5 class="card-title"><strong><?= $user['name'];?></strong></h5>
+										<h5 class="card-title"><strong><?= $user['user'];?></strong></h5>
 										<h5 class="card-title"><strong><?= $user['username'];?></strong></h5>
 										<p class="card-text"><?= $user['email'];?></p>
-										<p class="card-text"><?= $user['phone'];?></p>
-										<p class="card-text"><?= $user['address'];?></p>
-										<p class="card-text"><?= $user['dept'];?> | <?= $user['position'];?></p>
 										<p class="card-text"><small class="text-muted">Member since : <strong><?= date('d-m-Y', strtotime($user['createdAt']));?></strong></small></p>
 									</div>
 									<div class="btn-group mt-5">
@@ -64,7 +61,7 @@
 								<input type="hidden" name="id" id="id" value="<?= $user['id'];?>" >
 								<div class="form-group">
 									<label>Name</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Full Name" value="<?= $user['name'];?>" >
+									<input class="form-control" type="text" name="user" id="user" placeholder="Full Name" value="<?= $user['user'];?>" >
 								</div>
 								<div class="form-group">
 									<label>Username</label>
@@ -84,22 +81,6 @@
 								<div class="form-group">
 									<label>Email</label>
 									<input class="form-control" type="email" name="email" id="email" placeholder="Email" value="<?= $user['email'];?>">
-								</div>
-								<div class="form-group">
-									<label>Phone</label>
-									<input class="form-control" type="text" name="phone" id="phone" placeholder="Phone Number" value="<?= $user['phone'];?>">
-								</div>
-								<div class="form-group">
-									<label>Address</label>
-									<textarea class="form-control" type="text" name="address" id="address" placeholder="Address" ><?= $user['address'];?></textarea>
-								</div>
-								<div class="form-group">
-									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $user['dept'];?>">
-								</div>
-								<div class="form-group">
-									<label>Position</label>
-									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $user['position'];?>">
 								</div>
 								
 								<div class="modal-footer">

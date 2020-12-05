@@ -38,43 +38,38 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+					  	<th width="20px">No</th>
 						<th>Name</th>
 						<th>Username</th>
-						<th>Image</th>
+						<th width="90px">Image</th>
 						<th>Role</th>
 						<th>Is active</th>
 						<th>Email</th>
-						<th>Phone</th>
-						<th width="200px">Address</th>
-						<th>Department</th>
-						<th>Position</th>
-						<th width="80px">Action</th>
+						<th width="90px">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-					  <?php foreach($data as $val):?>
+					  <?php $no=0;
+					  		foreach($auth as $val): $no++;?>
 					  <tr>
-						<td><?= $val->name;?></td>
+					  	<td><?= $no;?></td>
+						<td><?= $val->user;?></td>
 						<td><?= $val->username;?></td>
-						<td><img width="80%" src="<?= base_url('assets/images/profile/'). $val->image;?>" /></td>
+						<td><img width="70%" src="<?= base_url('assets/images/profile/'). $val->image;?>" /></td>
 						<td><?= $val->role_id;?></td>
 						<td><?= $val->is_active;?></td>
 						<td><?= $val->email;?></td>
-						<td><?= $val->phone;?></td>
-						<td><?= $val->address;?></td>
-						<td><?= $val->dept;?></td>
-						<td><?= $val->position;?></td>
 						<td>
 							<div class="table-data-feature">
-								<button class="item" title="Edit" data-toggle="modal" data-target="#editUserModal<?= $val->id;?>" >
+								<button class="item" title="Edit" data-toggle="modal" data-target="#editUserModal<?= $val->user_id;?>" >
 									<i class="fa fa-pencil"></i>
 								</button>
 								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('admin/deluser/'. $val->id);?>')" >
-									<i class="fa fa-trash"></i></a>
+									<a href="#!" onclick="deleteConfirm('<?= base_url('admin/deluser/'. $val->user_id);?>')" >
+									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 								<button class="item" data-toggle="tooltip" title="Reset">
-									<a href="#!" onclick="resetPassword('<?= base_url('admin/resetPassword/'. $val->id);?>')" >
+									<a href="#!" onclick="resetPassword('<?= base_url('admin/resetPassword/'. $val->user_id);?>')" >
 									<i class="fa fa-key"></i></a>
 								</button>
 							</div>
@@ -103,7 +98,7 @@
 							<form action="<?= base_url('admin/adduser');?>" method="post">
 								<div class="form-group">
 									<label>Name</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="User Code" value="<?= set_value('name');?>" required>
+									<input class="form-control" type="text" name="user" id="user" placeholder="Full Name" value="<?= set_value('user');?>" required>
 								</div>
 								<div class="form-group">
 									<label>Username</label>
@@ -133,8 +128,8 @@
 		
 		<!-- modal editUser -->
 		<?php $no = 0;
-			foreach($data as $val): $no++;?>
-		<div class="modal fade" id="editUserModal<?= $val->id;?>" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
+			foreach($auth as $val): $no++;?>
+		<div class="modal fade" id="editUserModal<?= $val->user_id;?>" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -144,10 +139,10 @@
 					<div class="modal-body">
 						<div class="login-form">
 							<?= form_open_multipart('admin/edituser');?>
-								<input type="hidden" name="id" id="id" value="<?= $val->id;?>" >
+								<input type="hidden" name="user_id" id="user_id" value="<?= $val->user_id;?>" >
 								<div class="form-group">
 									<label>Name</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Full Name" value="<?= $val->name;?>" >
+									<input class="form-control" type="text" name="user" id="user" placeholder="Full Name" value="<?= $val->user;?>" >
 								</div>
 								<div class="form-group">
 									<label>Username</label>
@@ -169,20 +164,12 @@
 									<input class="form-control" type="email" name="email" id="email" placeholder="Email" value="<?= $val->email;?>">
 								</div>
 								<div class="form-group">
-									<label>Phone</label>
-									<input class="form-control" type="text" name="phone" id="phone" placeholder="Phone Number" value="<?= $val->phone;?>">
-								</div>
-								<div class="form-group">
-									<label>Address</label>
-									<textarea class="form-control" type="text" name="address" id="address" placeholder="Address" ><?= $val->address;?></textarea>
-								</div>
-								<div class="form-group">
-									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>">
-								</div>
-								<div class="form-group">
-									<label>Position</label>
-									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>">
+									<label>Is Active?</label>
+									<select class="form-control" name="is_active" id="is_active">
+										<option value="<?= $val->is_active;?>"><?= $val->is_active;?></option>
+										<option value="1">1 : Active</option>
+										<option value="0">0 : Not Active</option>
+									</select>
 								</div>
 								
 								<div class="modal-footer">

@@ -25,12 +25,6 @@
             </div><!-- /.col -->
           </div>
         </form>
-        <div class="register-link">
-            <p>
-                Don't have account?
-                <a href="<?= base_url('auth/register');?>">Sign Up Here</a>
-            </p>
-        </div>
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 

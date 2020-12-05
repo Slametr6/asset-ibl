@@ -38,7 +38,8 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-						<th>Name of Employes</th>
+	  					<th width="20px">No</th>
+						<th>Employee</th>
 						<th>Department</th>
 						<th>Position</th>
 						<th>Product Name</th>
@@ -52,8 +53,10 @@
                       </tr>
                     </thead>
                     <tbody>
-					  <?php foreach($request as $val):?>
+					  <?php $no=0;
+					  		foreach($request as $val): $no++;?>
 					  <tr>
+						<td><?= $no;?></td>
 						<td><?= $val->name;?></td>
 						<td><?= $val->dept;?></td>
 						<td><?= $val->position;?></td>
@@ -71,10 +74,10 @@
 								</button>
 								<button class="item" data-toggle="tooltip" title="Delete">
 									<a href="#!" onclick="deleteConfirm('<?= base_url('request/delrequest/'. $val->id);?>')">
-									<i class="fa fa-trash"></i></a>
+									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 								<button class="item" title="Return" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
-									<i class="fa fa-refresh"></i>
+									<i class="fa fa-refresh" style="color:green"></i>
 								</button>
 							</div>
 						</td>
@@ -121,7 +124,6 @@
 										<option value="<?= $prod->name;?>"><?= $prod->name;?></option>
 										<?php endforeach;?>
 									</select>
-									<!-- <input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" required> -->
 								</div>
 								<div class="form-group">
 									<label>Specification</label>
@@ -131,7 +133,6 @@
 										<option value="<?= $prod->description;?>"><?= $prod->description;?></option>
 										<?php endforeach;?>
 									</select>
-									<!-- <input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" required> -->
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
@@ -200,7 +201,6 @@
 										<option value="<?= $prod->name;?>"><?= $prod->name;?></option>
 										<?php endforeach;?>
 									</select>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" value="<?= $val->product_name;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Specification</label>
@@ -210,7 +210,6 @@
 										<option value="<?= $prod->description;?>"><?= $prod->description;?></option>
 										<?php endforeach;?>
 									</select>
-									<!-- <input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" value="<?= $val->spec;?>" required> -->
 								</div>
 								<div class="form-group">
 									<label>Brand</label>

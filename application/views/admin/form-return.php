@@ -38,7 +38,8 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-						<th>Name of Employes</th>
+	  					<th width="20px">No</th>
+						<th>Employee</th>
 						<th>Department</th>
 						<th>Position</th>
 						<th>Product Name</th>
@@ -53,8 +54,10 @@
                       </tr>
                     </thead>
                     <tbody>
-					  <?php foreach($return as $val):?>
+					  <?php $no=0;
+					  		foreach($return as $val): $no++?>
 					  <tr>
+						<td><?= $no;?></td>
 						<td><?= $val->name;?></td>
 						<td><?= $val->dept;?></td>
 						<td><?= $val->position;?></td>
@@ -73,7 +76,7 @@
 								</button>
 								<button  class="item" data-toggle="tooltip" title="Delete">
 									<a href="#!" onclick="deleteConfirm('<?= base_url('returnn/delreturn/'. $val->id);?>')">
-									<i class="fa fa-trash"></i></a>
+									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 							</div>
 						</td>

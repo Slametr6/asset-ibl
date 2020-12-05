@@ -14,14 +14,14 @@ class Admin extends CI_Controller {
 
 		} else {
 			if ($user['role_id'] == 1) {
-				$data['menu'] = 'admin';
-				$data['title'] = 'Admin Profile';
+				$data['menu'] = 'home';
+				$data['title'] = 'Admin Panel';
 				$data['user'] = $user;
-				$data['data'] = $this->db->get('users')->result();
+				$data['totalemp'] = $this->db->count_all_results('employees');
 				
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
-				$this->load->view('admin/profile', $data);
+				$this->load->view('admin/index', $data);
 				$this->load->view('include/footer'); 
 				
 			} else {
@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
 		$data['title'] = 'User Managements';
 		$data['user'] = $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array();
 		// $this->db->where('id !=', 1);
-		$data['data'] = $this->db->get('users')->result();
+		$data['auth'] = $this->m_auth->getUser();
 		
 		$this->load->view('include/header', $data);
 		$this->load->view('include/sidebar', $data);
@@ -47,7 +47,7 @@ class Admin extends CI_Controller {
 
 	public function addUser()
 	{
-		$this->form_validation->set_rules('name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('user', 'Full Name', 'trim|required');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[users.username]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|matches[password1]',[
 			'matches' => 'Password diferent!',
@@ -64,7 +64,7 @@ class Admin extends CI_Controller {
 
 		} else {
 			$data = [
-				'name' => htmlspecialchars($this->input->post('name', TRUE)),
+				'user' => htmlspecialchars($this->input->post('user', TRUE)),
 				'username' => htmlspecialchars($this->input->post('username')),
 				'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 				'image' => 'avatar.png',
@@ -73,7 +73,7 @@ class Admin extends CI_Controller {
 				'createdat' => date('Y-m-d'),
 				'createdby' => $this->session->userdata('username')
 			];
-			$this->db->insert('users', $data);
+			$this->m_auth->save($data);
 
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation account created successfully!</div>');
 			redirect('admin/user');
@@ -84,7 +84,7 @@ class Admin extends CI_Controller {
 	{
 		$username = $this->session->userdata('username');
 		$user = $this->db->get_where('users', ['username' => $username])->row_array();
-		$this->form_validation->set_rules('name', 'Full name', 'trim|required');
+		$this->form_validation->set_rules('user', 'Full name', 'trim|required');
 		
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/user');
@@ -111,18 +111,16 @@ class Admin extends CI_Controller {
 				}
 			}
 			$data = [
-				'name' => htmlspecialchars($this->input->post('name', TRUE)),
+				'user' => htmlspecialchars($this->input->post('user', TRUE)),
 				'username' => htmlspecialchars($this->input->post('username', TRUE)),
+				'is_active' => htmlspecialchars($this->input->post('is_active', TRUE)),
 				'email' => htmlspecialchars($this->input->post('email', TRUE)),
-				'phone' => htmlspecialchars($this->input->post('phone', TRUE)),
-				'address' => htmlspecialchars($this->input->post('address', TRUE)),
-				'dept' => htmlspecialchars($this->input->post('dept', TRUE)),
-				'position' => htmlspecialchars($this->input->post('position', TRUE)),
 				'updatedat' => date('Y-m-d'),
 				'updatedby' => $username
 			];
-			$id = $this->input->post('id');
-			$this->db->update('users', $data, ['id' => $id]);			
+			$id = $this->input->post('user_id');
+			$this->m_auth->update($data, $id);
+			// var_dump($data, $id);			
 			
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User updated successfully!</div>');
 			redirect('admin/user');
@@ -131,67 +129,64 @@ class Admin extends CI_Controller {
 	}
 
 	public function delUser($id)
-	{	
-		$this->db->delete('users', ['id' => $id]);
+	{
+		$this->m_auth->delete($id);
 		
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User deleted successfully!</div>');
 		redirect('admin/user');
 	}
 	
-	public function editProfile()
-	{
-		$username = $this->session->userdata('username');
-		$user = $this->db->get_where('users', ['username' => $username])->row_array();
-		$this->form_validation->set_rules('name', 'Full name', 'trim|required');
+	// public function editProfile()
+	// {
+	// 	$username = $this->session->userdata('username');
+	// 	$user = $this->db->get_where('users', ['username' => $username])->row_array();
+	// 	$this->form_validation->set_rules('name', 'Full name', 'trim|required');
 		
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('admin');
+	// 	if ($this->form_validation->run() == FALSE) {
+	// 		$this->load->view('admin');
 
-		} else {
-			$upload_img = $_FILES['image']['name'];
+	// 	} else {
+	// 		$upload_img = $_FILES['image']['name'];
 
-			if ($upload_img) {
-				$config['upload_path'] = 'assets/images/profile/';
-				$config['allowed_types'] = 'jpg|gif|png|jpeg|JPG|PNG';
-				$config['max_size'] = '1024';
+	// 		if ($upload_img) {
+	// 			$config['upload_path'] = 'assets/images/profile/';
+	// 			$config['allowed_types'] = 'jpg|gif|png|jpeg|JPG|PNG';
+	// 			$config['max_size'] = '1024';
 
-				$this->load->library('upload', $config);
-				if ($this->upload->do_upload('image')) {
-					$def_img = $user['image'];
-					if ($def_img != 'avatar.png') {
-						unlink(FCPATH.'assets/images/profile/'.$def_img);
-					}
-					$new_img = $this->upload->data('file_name');
-					$this->db->set('image', $new_img);
+	// 			$this->load->library('upload', $config);
+	// 			if ($this->upload->do_upload('image')) {
+	// 				$def_img = $user['image'];
+	// 				if ($def_img != 'avatar.png') {
+	// 					unlink(FCPATH.'assets/images/profile/'.$def_img);
+	// 				}
+	// 				$new_img = $this->upload->data('file_name');
+	// 				$this->db->set('image', $new_img);
 
-				} else {
-					echo $this->upload->display_errors();
-				}
-			}
-			$data = [
-				'name' => htmlspecialchars($this->input->post('name', TRUE)),
-				'username' => htmlspecialchars($this->input->post('username', TRUE)),
-				'email' => htmlspecialchars($this->input->post('email', TRUE)),
-				'phone' => htmlspecialchars($this->input->post('phone', TRUE)),
-				'address' => htmlspecialchars($this->input->post('address', TRUE)),
-				'dept' => htmlspecialchars($this->input->post('dept', TRUE)),
-				'position' => htmlspecialchars($this->input->post('position', TRUE)),
-				'updatedat' => date('Y-m-d'),
-				'updatedby' => $username
-			];
-			$id = $this->input->post('id');
-			$this->db->update('users', $data, ['id' => $id]);			
+	// 			} else {
+	// 				echo $this->upload->display_errors();
+	// 			}
+	// 		}
+	// 		$data = [
+	// 			'name' => htmlspecialchars($this->input->post('name', TRUE)),
+	// 			'username' => htmlspecialchars($this->input->post('username', TRUE)),
+	// 			'email' => htmlspecialchars($this->input->post('email', TRUE)),
+	// 			'dept' => htmlspecialchars($this->input->post('dept', TRUE)),
+	// 			'updatedat' => date('Y-m-d'),
+	// 			'updatedby' => $username
+	// 		];
+	// 		$id = $this->input->post('id');
+	// 		$this->m_auth->update($data, $id);			
 			
-			if($user['role_id'] == 1) {
-				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile updated successfully!</div>');
-				redirect('admin');
+	// 		if($user['role_id'] == 1) {
+	// 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile updated successfully!</div>');
+	// 			redirect('admin');
 
-			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile updated successfully!</div>');
-				redirect('user');
-			}
-		}
-	}
+	// 		} else {
+	// 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile updated successfully!</div>');
+	// 			redirect('user');
+	// 		}
+	// 	}
+	// }
 
 	public function changePassword()
 	{

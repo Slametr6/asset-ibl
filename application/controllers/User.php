@@ -16,6 +16,7 @@ class User extends CI_Controller {
 		$data['menu'] = 'user';
 		$data['title'] = 'User Profile';
 		$data['user'] = $user;
+		$data['dept'] = $this->m_company->getDept();
 		
 		$this->load->view('include/header', $data);
 		$this->load->view('include/user-sidebar', $data);

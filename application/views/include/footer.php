@@ -10,18 +10,18 @@
 					<div class="modal-body">
 						<div class="login-form">
 							<form action="<?= base_url('admin/changePassword');?>" method="post">
-								<input type="hidden" name="id" id="id" value="<?= $user['id'];?>" >
+								<input type="hidden" name="id" id="id" value="<?= $user['user_id'];?>" >
 								<div class="form-group">
 									<label>Current Password</label>
-									<input type="password" class="form-control" id="current_password" name="current_password">
+									<input type="password" class="form-control" id="current_password" name="current_password" placeholder="Current Password" required>
 								</div>
 								<div class="form-group">
 									<label for="new_password1">New Password</label>
-									<input type="password" class="form-control" id="new_password1" name="new_password1">
+									<input type="password" class="form-control" id="new_password1" name="new_password1" placeholder="New Password" required>
 								</div>
 								<div class="form-group">
 									<label for="new_password2">Repeat Password</label>
-									<input type="password" class="form-control" id="new_password2" name="new_password2">
+									<input type="password" class="form-control" id="new_password2" name="new_password2" placeholder="Repeat Password" required>
 								</div>
 								
 								<div class="modal-footer">
@@ -47,14 +47,14 @@
 					<div class="modal-body">
 						<div class="login-form">
 							<form action="<?= base_url('admin/resetPassword');?>" method="post">
-								<input type="hidden" name="id" id="id" value="<?= $user['id'];?>" >
+								<input type="hidden" name="id" id="id" value="<?= $user['user_id'];?>" >
 								<div class="form-group">
 									<label for="password1">New Password</label>
-									<input type="password" class="form-control" id="password1" name="password1">
+									<input type="password" class="form-control" id="password1" name="password1" placeholder="New Password" required>
 								</div>
 								<div class="form-group">
 									<label for="password2">Repeat Password</label>
-									<input type="password" class="form-control" id="password2" name="password2">
+									<input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat Password" required>
 								</div>
 								
 								<div class="modal-footer">
