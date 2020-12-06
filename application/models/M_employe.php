@@ -12,7 +12,7 @@ class M_employe extends CI_Model {
 				->join('branch c', 'c.branch_id = a.branch', 'inner');
 		$data = $this->db->get();
 		if ($id) {
-			return $data->where(['a.employe_id' => $id])->row_array();
+			return $data->row_array();
 		} else {
 			return $data->result();
 		}

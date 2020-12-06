@@ -18,6 +18,8 @@ class Asset extends CI_Controller {
 				$data['title'] = 'Asset Managements';
 				$data['user'] = $user;
 				$data['asset'] = $this->m_asset->getAsset();
+				$data['cat'] = $this->m_asset->getCat();
+				$data['location'] = $this->m_asset->getLocation();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
@@ -37,6 +39,55 @@ class Asset extends CI_Controller {
 			}
 		}
 		
+	}
+
+	public function addAsset()
+	{
+		$data = [
+			'category' => $this->input->post('category'),
+			'no_eq' => $this->input->post('no_eq'),
+			'no_asset' => $this->input->post('no_asset'),
+			'sn' => $this->input->post('sn'),
+			'descript' => $this->input->post('descript'),
+			'location' => $this->input->post('location'),
+			'conditions' => $this->input->post('conditions'),
+			'status' => $this->input->post('status'),
+			'createdAt' => date('Y-m-d'),
+			'createdBy' => $this->session->userdata('username')
+		];
+		$this->m_asset->save($data);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Asset created successfully!</div>');
+		redirect('asset');
+	}
+
+	public function editAsset()
+	{
+		$data = [
+			'category' => $this->input->post('category'),
+			'no_eq' => $this->input->post('no_eq'),
+			'no_asset' => $this->input->post('no_asset'),
+			'sn' => $this->input->post('sn'),
+			'descript' => $this->input->post('descript'),
+			'location' => $this->input->post('location'),
+			'conditions' => $this->input->post('conditions'),
+			'status' => $this->input->post('status'),
+			'updatedAt' => date('Y-m-d'),
+			'updatedBy' => $this->session->userdata('username')
+		];
+		$id = $this->input->post('asset_id');
+		$this->m_asset->update($data, $id);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Asset updated successfully!</div>');
+		redirect('asset');
+	}
+
+	public function delAsset($id)
+	{	
+		$this->m_asset->delete($id);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Asset deleted successfully!</div>');
+		redirect('asset/unit');
 	}
 
 	public function Category()
@@ -147,6 +198,55 @@ class Asset extends CI_Controller {
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Location deleted successfully!</div>');
 		redirect('asset/location');
+	}
+
+	public function Unit()
+	{
+		$username = $this->session->userdata('username');
+		$user = $this->db->get_where('users', ['username' => $username])->row_array();
+
+		if ($username == '') {
+			redirect('auth');
+
+		} else {
+			if ($user['role_id'] == 1) {
+				$data['menu'] = 'unit';
+				$data['title'] = 'Unit Managements';
+				$data['user'] = $user;
+				$data['unit'] = $this->m_asset->getUnit();
+		
+				$this->load->view('include/header', $data);
+				$this->load->view('include/sidebar', $data);
+				$this->load->view('admin/unit', $data);
+				$this->load->view('include/footer');
+				
+			} else {
+				redirect('user');
+			}
+		}
+		
+	}
+
+	public function addUnit()
+	{
+		$data = [
+			'unit' => $this->input->post('unit'),
+			'description' => $this->input->post('description'),
+			'createdAt' => date('Y-m-d'),
+			'createdBy' => $this->session->userdata('username')
+		];
+		$this->m_asset->saveUnit($data);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Unit created successfully!</div>');
+		redirect('asset/unit');
+	}
+
+	public function delUnit($id)
+	{	
+		$this->m_asset->delUnit($id);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Unit deleted successfully!</div>');
+		redirect('asset/unit');
 	}
 
 }

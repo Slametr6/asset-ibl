@@ -6,10 +6,15 @@ class M_asset extends CI_Model {
 
 	public function getAsset($id = '')
 	{
+		$this->db->select('*, b.cat_name as category, c.description as location')
+				->from('assets a')
+				->join('category b', 'b.cat_id = a.category', 'inner')
+				->join('location c', 'c.location_id = a.location', 'inner');
+		$data = $this->db->get();
 		if ($id) {
-			return $this->db->get_where('assets', ['id' => $id])->row_array();
+			return $data->row_array();
 		} else {
-			return $this->db->get('assets')->result();
+			return $data->result();
 		}
 	}
 
@@ -20,12 +25,12 @@ class M_asset extends CI_Model {
 
 	public function update($data, $id)
 	{
-		return $this->db->update('assets', $data, ['id' => $id]);
+		return $this->db->update('assets', $data, ['asset_id' => $id]);
 	}
 
 	public function delete($id)
 	{
-		return $this->db->delete('assets', ['id' => $id]);
+		return $this->db->delete('assets', ['asset_id' => $id]);
 	}
 
 	public function getCat($id = '')
@@ -76,6 +81,25 @@ class M_asset extends CI_Model {
 	public function delLocation($id)
 	{
 		return $this->db->delete('location', ['location_id' => $id]);
+	}
+
+	public function getUnit($id = '')
+	{
+		if ($id) {
+			return $this->db->get_where('unit', ['unit_id' => $id])->row_array();
+		} else {
+			return $this->db->get('unit')->result();
+		}
+	}
+
+	public function saveUnit($data)
+	{
+		return $this->db->insert('unit', $data);
+	}
+
+	public function delUnit($id)
+	{
+		return $this->db->delete('unit', ['unit_id' => $id]);
 	}
 
 }

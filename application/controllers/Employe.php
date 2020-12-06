@@ -43,6 +43,7 @@ class Employe extends CI_Controller {
 		$this->m_employe->checkEmployeId();
 		$data = [
 			'employe_id' => $this->input->post('employe_code'),
+			'nik' => $this->input->post('nik'),
 			'emp_name' => $this->input->post('emp_name'),
 			'gender' => $this->input->post('gender'),
 			'birthday' => $this->input->post('birthday'),
@@ -92,6 +93,7 @@ class Employe extends CI_Controller {
 				}
 			}
 			$data = [
+				'nik' => htmlspecialchars($this->input->post('nik', TRUE)),
 				'emp_name' => htmlspecialchars($this->input->post('emp_name', TRUE)),
 				'gender' => htmlspecialchars($this->input->post('gender', TRUE)),
 				'birthday' => htmlspecialchars($this->input->post('birthday', TRUE)),

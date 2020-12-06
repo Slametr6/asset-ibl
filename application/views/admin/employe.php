@@ -39,9 +39,9 @@
                     <thead>
                       <tr>
 					    <th width="20px">No</th>
-						<th>Employee ID</th>
+						<th>NIK</th>
 						<th>Name</th>
-						<th width="90px">Image</th>
+						<th width="70px">Image</th>
 						<th>Gender</th>
 						<th>Birthday</th>
 						<th>Email</th>
@@ -57,9 +57,9 @@
 					 		foreach($employe as $emp): $no++;?>
 					  <tr>
 	  					<td><?= $no;?></td>
-						<td><?= $emp->employe_id;?></td>
+						<td><?= $emp->nik;?></td>
 						<td><?= $emp->emp_name;?></td>
-						<td><img width="80%" src="<?= base_url('assets/images/profile/'). $emp->image;?>" /></td>
+						<td><img width="50%" src="<?= base_url('assets/images/profile/'). $emp->image;?>" /></td>
 						<td><?= $emp->gender;?></td>
 						<td><?= date('d-m-Y', strtotime($emp->birthday));?></td>
 						<td><?= $emp->email;?></td>
@@ -103,6 +103,10 @@
 								<div class="form-group">
 									<label>Employee ID</label>
 									<input class="form-control" type="text" name="employe_code" id="employe_code" value="18<?= sprintf("%06s", $employe_id);?>" readonly>
+								</div>
+								<div class="form-group">
+									<label>NIK</label>
+									<input class="form-control" type="text" name="nik" id="nik" placeholder="NIK" value="<?= set_value('nik');?>" required>
 								</div>
 								<div class="form-group">
 									<label>Name</label>
@@ -176,9 +180,10 @@
 					<div class="modal-body">
 						<div class="login-form">
 							<?= form_open_multipart('employe/editemploye');?>
+								<input class="form-control" type="hidden" name="employe_id" id="employe_id" value="<?= $emp->employe_id;?>" required>
 								<div class="form-group">
-									<label>Employee ID</label>
-									<input class="form-control" type="text" name="employe_id" id="employe_id" value="<?= $emp->employe_id;?>" readonly>
+									<label>NIK</label>
+									<input class="form-control" type="text" name="nik" id="nik" placeholder="NIK" value="<?= $emp->nik;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Name</label>

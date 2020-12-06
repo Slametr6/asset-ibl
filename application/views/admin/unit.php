@@ -3,8 +3,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Data of Location
-            <small>Location Managements</small>
+            Data of Unit
+            <small>Unit Managements</small>
           </h1>
         </section>
 
@@ -16,8 +16,8 @@
                 <div class="box-header">
 				  <div class="margin">
 						<div class="btn-group">
-							<button type="button" class="btn btn-success btn-md-left" data-toggle="modal" data-target="#addLocationModal">
-								<i class="zmdi zmdi-plus"></i>Add location
+							<button type="button" class="btn btn-success btn-md-left" data-toggle="modal" data-target="#addUnitModal">
+								<i class="zmdi zmdi-plus"></i>Add unit
 							</button>
 						</div>
 					</div>
@@ -28,22 +28,22 @@
                     <thead>
                       <tr>
 	  					<th width="20px">No</th>
-						<th width="150px">Location Id</th>
-						<th>Name</th>
+						<th width="150px">Unit</th>
+						<th>Description</th>
 						<th width="80px">Action</th>
                       </tr>
                     </thead>
                     <tbody>
 					  <?php $no=0;
-					  		foreach($location as $val): $no++;?>
+					  		foreach($unit as $val): $no++;?>
 					  <tr>
 	  					<td><?= $no;?></td>
-						<td><?= $val->location_id;?></td>
+						<td><?= $val->unit;?></td>
 						<td><?= $val->description;?></td>
 						<td>
 							<div class="table-data-feature">
 								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('asset/dellocation/'. $val->location_id);?>')" >
+									<a href="#!" onclick="deleteConfirm('<?= base_url('asset/delunit/'. $val->unit_id);?>')" >
 									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 							</div>
@@ -59,24 +59,24 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
-		<!-- modal addLocation -->
-		<div class="modal fade" id="addLocationModal" tabindex="-1" role="dialog" aria-labelledby="addLocationModal" aria-hidden="true">
+		<!-- modal addUnit -->
+		<div class="modal fade" id="addUnitModal" tabindex="-1" role="dialog" aria-labelledby="addUnitModal" aria-hidden="true">
 			<div class="modal-dialog modal-md" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="addLocationModal">Add Location</h4>
+						<h4 class="modal-title" id="addUnitModal">Add Unit</h4>
 					</div>
 					<div class="modal-body">
 						<div class="login-form">
-							<form action="<?= base_url('asset/addlocation');?>" method="post">
+							<form action="<?= base_url('asset/addunit');?>" method="post">
 								<div class="form-group">
-									<label>Location ID</label>
-									<input class="form-control" type="text" name="location_code" id="location_code" value="30<?= sprintf("%04s", $location_id) ?>" readonly>
+									<label>Unit</label>
+									<input class="form-control" type="text" name="unit" id="unit" placeholder="Unit" required>
 								</div>
 								<div class="form-group">
-									<label>Location Name</label>
-									<input class="form-control" type="text" name="description" id="description" placeholder="Location Name" required>
+									<label>Description</label>
+									<input class="form-control" type="text" name="description" id="description" placeholder="Description Unit" required>
 								</div>
 
 								<div class="modal-footer">

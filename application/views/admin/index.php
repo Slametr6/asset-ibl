@@ -5,6 +5,9 @@
             Dashboard
             <small>Control panel</small>
           </h1>
+					<div class="col-xs-12">
+						<?= $this->session->flashdata('message');?>
+					</div>
         </section>
 
         <!-- Main content -->
@@ -26,7 +29,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53</h3>
+                  <h3><?= $totalasset;?></h3>
                   <p>Total Assets</p>
                 </div>
                 <div class="icon">
@@ -38,7 +41,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3><?= $assetuse;?></h3>
                   <p>Asset In Use</p>
                 </div>
                 <div class="icon">
@@ -50,7 +53,7 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>65</h3>
+                  <h3><?= $notuse;?></h3>
                   <p>Asset Not Use</p>
                 </div>
                 <div class="icon">

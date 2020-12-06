@@ -47,6 +47,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+                <li><a href="<?= base_url('asset/unit');?>"><i class="fa fa-arrow-circle-right"></i> Asset Unit</a></li>
                 <li><a href="<?= base_url('asset/category');?>"><i class="fa fa-arrow-circle-right"></i> Asset Category</a></li>
                 <li><a href="<?= base_url('asset/location');?>"><i class="fa fa-arrow-circle-right"></i> Asset Location</a></li>
                 <li><a href="<?= base_url('asset');?>"><i class="fa fa-desktop"></i> Asset Data</a></li>

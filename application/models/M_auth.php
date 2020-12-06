@@ -11,7 +11,7 @@ class M_auth extends CI_Model {
 				->join('user_role b', 'b.id = a.role_id', 'inner');
 		$data = $this->db->get();
 		if ($id) {
-			return $data->where(['a.user_id' => $id])->row_array();
+			return $data->row_array();
 		} else {
 			return $data->result();
 		}

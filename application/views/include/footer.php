@@ -9,8 +9,8 @@
 					</div>
 					<div class="modal-body">
 						<div class="login-form">
-							<form action="<?= base_url('admin/changePassword');?>" method="post">
-								<input type="hidden" name="id" id="id" value="<?= $user['user_id'];?>" >
+							<form action="<?= base_url('auth/changePassword');?>" method="post">
+								<input type="hidden" name="user_id" id="user_id" value="<?= $user['user_id'];?>" >
 								<div class="form-group">
 									<label>Current Password</label>
 									<input type="password" class="form-control" id="current_password" name="current_password" placeholder="Current Password" required>
@@ -35,39 +35,6 @@
 			</div>
 		</div>
 		<!-- end modal changePasswordModal -->
-
-		<!-- modal resetPasswordModal -->
-		<div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog" aria-labelledby="resetPasswordModal" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="resetPasswordModal">Reset Password</h4>
-					</div>
-					<div class="modal-body">
-						<div class="login-form">
-							<form action="<?= base_url('admin/resetPassword');?>" method="post">
-								<input type="hidden" name="id" id="id" value="<?= $user['user_id'];?>" >
-								<div class="form-group">
-									<label for="password1">New Password</label>
-									<input type="password" class="form-control" id="password1" name="password1" placeholder="New Password" required>
-								</div>
-								<div class="form-group">
-									<label for="password2">Repeat Password</label>
-									<input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat Password" required>
-								</div>
-								
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									<button id="btn-reset" type="submit" class="btn btn-primary">Confirm</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end modal resetPasswordModal -->
 
 			<!-- modal Delete -->
 			<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,12 +109,6 @@
 			function changePassword(url){
 				$('#btn-pass').attr('href', url);
 				$('#changePasswordModal').modal();
-			}
-		</script>
-		<script>
-			function resetPassword(url){
-				$('#btn-reset').attr('href', url);
-				$('#resetPasswordModal').modal();
 			}
 		</script>
 		<script type="text/javascript">

@@ -29,6 +29,7 @@ class Returnn extends CI_Controller {
 				$data['menu'] = 'return';
 				$data['title'] = 'Form Return Managements';
 				$data['user'] = $user;
+				$data['auth'] = $this->m_auth->getUser();
 				$data['return'] = $this->m_return->getReturn();
 
 				$this->load->view('include/header', $data);

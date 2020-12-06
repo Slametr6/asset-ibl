@@ -41,7 +41,7 @@
 					  	<th width="20px">No</th>
 						<th>Name</th>
 						<th>Username</th>
-						<th width="90px">Image</th>
+						<th width="70px">Image</th>
 						<th>Role</th>
 						<th>Is active</th>
 						<th>Email</th>
@@ -55,7 +55,7 @@
 					  	<td><?= $no;?></td>
 						<td><?= $val->user;?></td>
 						<td><?= $val->username;?></td>
-						<td><img width="70%" src="<?= base_url('assets/images/profile/'). $val->image;?>" /></td>
+						<td><img width="40%" src="<?= base_url('assets/images/profile/'). $val->image;?>" /></td>
 						<td><?= $val->role_id;?></td>
 						<td><?= $val->is_active;?></td>
 						<td><?= $val->email;?></td>
@@ -65,12 +65,11 @@
 									<i class="fa fa-pencil"></i>
 								</button>
 								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('admin/deluser/'. $val->user_id);?>')" >
+									<a href="#!" onclick="deleteConfirm('<?= base_url('auth/deluser/'. $val->user_id);?>')" >
 									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
-								<button class="item" data-toggle="tooltip" title="Reset">
-									<a href="#!" onclick="resetPassword('<?= base_url('admin/resetPassword/'. $val->user_id);?>')" >
-									<i class="fa fa-key"></i></a>
+								<button class="item" title="Reset" data-toggle="modal" data-target="#resetPasswordModal<?= $val->user_id;?>" >
+									<i class="fa fa-key" style="color:blue"></i>
 								</button>
 							</div>
 						</td>
@@ -95,7 +94,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="login-form">
-							<form action="<?= base_url('admin/adduser');?>" method="post">
+							<form action="<?= base_url('auth/adduser');?>" method="post">
 								<div class="form-group">
 									<label>Name</label>
 									<input class="form-control" type="text" name="user" id="user" placeholder="Full Name" value="<?= set_value('user');?>" required>
@@ -138,7 +137,7 @@
 					</div>
 					<div class="modal-body">
 						<div class="login-form">
-							<?= form_open_multipart('admin/edituser');?>
+							<?= form_open_multipart('auth/edituser');?>
 								<input type="hidden" name="user_id" id="user_id" value="<?= $val->user_id;?>" >
 								<div class="form-group">
 									<label>Name</label>
@@ -164,6 +163,15 @@
 									<input class="form-control" type="email" name="email" id="email" placeholder="Email" value="<?= $val->email;?>">
 								</div>
 								<div class="form-group">
+									<label>Role ID</label>
+									<select class="form-control" name="role_id" id="role_id" required>
+										<option value="<?= $val->id;?>"><?= $val->role_id;?></option>
+										<?php foreach($role as $r):?>
+										<option value="<?= $r->id;?>"><?= $r->role;?></option>
+										<?php endforeach;?>
+									</select>
+								</div>
+								<div class="form-group">
 									<label>Is Active?</label>
 									<select class="form-control" name="is_active" id="is_active">
 										<option value="<?= $val->is_active;?>"><?= $val->is_active;?></option>
@@ -184,3 +192,39 @@
 		</div>
 		<?php endforeach;?>
 		<!-- end modal editUser -->
+		
+		<!-- modal resetPasswordModal -->
+		<?php $no = 0;
+			foreach($auth as $val): $no++;?>
+		<div class="modal fade" id="resetPasswordModal<?= $val->user_id;?>" tabindex="-1" role="dialog" aria-labelledby="resetPasswordModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="resetPasswordModal">Reset Password</h4>
+					</div>
+					<div class="modal-body">
+						<div class="login-form">
+							<form action="<?= base_url('auth/resetPassword');?>" method="post">
+								<input type="hidden" name="user_id" id="user_id" value="<?= $val->user_id;?>" >
+								<div class="form-group">
+									<label for="password1">New Password</label>
+									<input type="password" class="form-control" id="password1" name="password1" placeholder="New Password" required>
+								</div>
+								<div class="form-group">
+									<label for="password2">Repeat Password</label>
+									<input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat Password" required>
+								</div>
+								
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button id="btn-reset" type="submit" class="btn btn-primary">Confirm</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endforeach;?>
+		<!-- end modal resetPasswordModal -->
