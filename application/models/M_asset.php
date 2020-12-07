@@ -18,6 +18,12 @@ class M_asset extends CI_Model {
 		}
 	}
 
+	public function checkNoEq()
+	{
+		$no_eq = $this->db->query('SELECT MAX(no_eq) as eq_code FROM assets')->row();
+		return $no_eq->eq_code;
+	}
+
 	public function save($data)
 	{
 		return $this->db->insert('assets', $data);
@@ -31,6 +37,20 @@ class M_asset extends CI_Model {
 	public function delete($id)
 	{
 		return $this->db->delete('assets', ['asset_id' => $id]);
+	}
+
+	public function getUserAsset($id = '')
+	{
+		$this->db->select('*, b.no_eq as no_eq, c.employe_id as nik')
+				->from('user_asset a')
+				->join('assets b', 'b.no_eq = a.no_eq', 'inner')
+				->join('employees c', 'c.employe_id = a.nik', 'inner');
+		$data = $this->db->get();
+		if ($id) {
+			return $data->row_array();
+		} else {
+			return $data->result();
+		}
 	}
 
 	public function getCat($id = '')

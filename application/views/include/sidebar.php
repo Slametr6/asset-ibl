@@ -51,7 +51,7 @@
                 <li><a href="<?= base_url('asset/category');?>"><i class="fa fa-arrow-circle-right"></i> Asset Category</a></li>
                 <li><a href="<?= base_url('asset/location');?>"><i class="fa fa-arrow-circle-right"></i> Asset Location</a></li>
                 <li><a href="<?= base_url('asset');?>"><i class="fa fa-desktop"></i> Asset Data</a></li>
-                <li><a href="#"><i class="fa fa-desktop"></i> User Asset Data</a></li>
+                <li><a href="<?= base_url('asset/userasset');?>"><i class="fa fa-desktop"></i> User Asset Data</a></li>
               </ul>
             </li>
             <li class="treeview">

@@ -9,6 +9,11 @@ class Asset extends CI_Controller {
 		$username = $this->session->userdata('username');
 		$user = $this->db->get_where('users', ['username' => $username])->row_array();
 
+		$checkId = $this->m_asset->checkNoEq();
+		$getId = substr($checkId, 3, 4);
+		$idNow = $getId+1;
+		$data = array('no_eq' => $idNow);
+
 		if ($username == '') {
 			redirect('auth');
 			
@@ -43,15 +48,16 @@ class Asset extends CI_Controller {
 
 	public function addAsset()
 	{
+		$this->m_asset->checkNoEq();
 		$data = [
 			'category' => $this->input->post('category'),
-			'no_eq' => $this->input->post('no_eq'),
+			'no_eq' => $this->input->post('eq_code'),
 			'no_asset' => $this->input->post('no_asset'),
 			'sn' => $this->input->post('sn'),
 			'descript' => $this->input->post('descript'),
-			'location' => $this->input->post('location'),
-			'conditions' => $this->input->post('conditions'),
-			'status' => $this->input->post('status'),
+			'location' => '300001',
+			'conditions' => 'ok',
+			'status' => 'not_use',
 			'createdAt' => date('Y-m-d'),
 			'createdBy' => $this->session->userdata('username')
 		];
@@ -88,6 +94,46 @@ class Asset extends CI_Controller {
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Asset deleted successfully!</div>');
 		redirect('asset/unit');
+	}
+
+	public function userAsset()
+	{
+		$username = $this->session->userdata('username');
+		$user = $this->db->get_where('users', ['username' => $username])->row_array();
+
+		if ($username == '') {
+			redirect('auth');
+			
+		} else {
+			if ($user['role_id'] == 1) {
+				$data['menu'] = 'user-asset';
+				$data['title'] = 'User Asset Managements';
+				$data['user'] = $user;
+				$data['userasset'] = $this->m_asset->getUserAsset();
+				$data['asset'] = $this->m_asset->getAsset();
+				$data['cat'] = $this->m_asset->getCat();
+				$data['location'] = $this->m_asset->getLocation();
+				$data['employe'] = $this->m_employe->getEmploye();
+				$data['unit'] = $this->m_asset->getUnit();
+		
+				$this->load->view('include/header', $data);
+				$this->load->view('include/sidebar', $data);
+				$this->load->view('admin/user-asset', $data);
+				$this->load->view('include/footer');
+				
+			} else {
+				$data['menu'] = 'asset';
+				$data['title'] = 'Asset Managements';
+				$data['user'] = $user;
+				$data['asset'] = $this->m_asset->getAsset();
+				
+				$this->load->view('include/header', $data);
+				$this->load->view('include/user-sidebar', $data);
+				$this->load->view('user/asset', $data);
+				$this->load->view('include/footer');
+			}
+		}
+		
 	}
 
 	public function Category()
