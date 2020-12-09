@@ -93,7 +93,7 @@ class Asset extends CI_Controller {
 		$this->m_asset->delete($id);
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Asset deleted successfully!</div>');
-		redirect('asset/unit');
+		redirect('asset');
 	}
 
 	public function userAsset()
@@ -111,10 +111,7 @@ class Asset extends CI_Controller {
 				$data['user'] = $user;
 				$data['userasset'] = $this->m_asset->getUserAsset();
 				$data['asset'] = $this->m_asset->getAsset();
-				$data['cat'] = $this->m_asset->getCat();
-				$data['location'] = $this->m_asset->getLocation();
 				$data['employe'] = $this->m_employe->getEmploye();
-				$data['unit'] = $this->m_asset->getUnit();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
@@ -134,6 +131,70 @@ class Asset extends CI_Controller {
 			}
 		}
 		
+	}
+
+	public function addUserAsset()
+	{
+		$data = [
+			'category' => $this->input->post('category'),
+			'no_eq' => $this->input->post('eq_code'),
+			'no_asset' => $this->input->post('no_asset'),
+			'sn' => $this->input->post('sn'),
+			'descript' => $this->input->post('descript'),
+			'nik' => $this->input->post('nik'),
+			'emp_name' => $this->input->post('emp_name'),
+			'gender' => $this->input->post('gender'),
+			'dept' => $this->input->post('dept'),
+			'branch' => $this->input->post('branch'),
+			'location' => $this->input->post('location'),
+			'qty' => $this->input->post('qty'),
+			'unit_id' => $this->input->post('unit_id'),
+			'conditions' => $this->input->post('conditions'),
+			'status' => $this->input->post('status'),
+			'createdAt' => date('Y-m-d'),
+			'createdBy' => $this->session->userdata('username')
+		];
+		$this->m_asset->saveUserAsset($data);
+		var_dump($data);
+
+		// $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User asset created successfully!</div>');
+		// redirect('asset/userasset');
+	}
+
+	public function editUserAsset()
+	{
+		$data = [
+			'category' => $this->input->post('category'),
+			'no_eq' => $this->input->post('eq_code'),
+			'no_asset' => $this->input->post('no_asset'),
+			'sn' => $this->input->post('sn'),
+			'descript' => $this->input->post('descript'),
+			'nik' => $this->input->post('nik'),
+			'emp_name' => $this->input->post('emp_name'),
+			'gender' => $this->input->post('gender'),
+			'dept' => $this->input->post('dept'),
+			'branch' => $this->input->post('branch'),
+			'location' => $this->input->post('location'),
+			'qty' => $this->input->post('qty'),
+			'unit_id' => $this->input->post('unit_id'),
+			'conditions' => $this->input->post('conditions'),
+			'status' => $this->input->post('status'),
+			'updatedAt' => date('Y-m-d'),
+			'updatedBy' => $this->session->userdata('username')
+		];
+		$id = $this->input->post('userasset_id');
+		$this->m_asset->updateUserAsset($data, $id);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User asset updated successfully!</div>');
+		redirect('asset/userasset');
+	}
+
+	public function delUserAsset($id)
+	{	
+		$this->m_asset->deleteUserAsset($id);
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User asset deleted successfully!</div>');
+		redirect('asset/userasset');
 	}
 
 	public function Category()

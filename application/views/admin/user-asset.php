@@ -105,44 +105,62 @@
 					</div>
 					<div class="modal-body">
 						<div class="login-form">
-							<form action="<?= base_url('asset/addasset');?>" method="post">
+							<form action="<?= base_url('asset/adduserasset');?>" method="post">
+								<input class="form-control" type="hidden" name="category" id="category" value="<?= set_value('category');?>" readonly>
 								<div class="form-group">
 									<label>No Equipment</label>
-									<select class="form-control" name="no_eq" id="no_eq" required>
+									<input class="form-control" type="text" name="no_eq" id="no_eq" placeholder="No Equipment" value="<?= set_value('no_eq');?>" required>
+									
+									<!-- <select class="form-control" name="no_eq" id="no_eq" value="<?= set_value('no_eq');?>" required>
 									<option value="">Select..</option>
-									</select>
+									</select> -->
 								</div>
+								<input class="form-control" type="hidden" name="no_asset" id="no_asset" value="<?= set_value('no_asset');?>" readonly>
+								<input class="form-control" type="hidden" name="sn" id="sn" value="<?= set_value('sn');?>" readonly>
 								<div class="form-group">
 									<label>Description</label>
-									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" value="" readonly></textarea>
+									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" value="<?= set_value('descript');?>" readonly></textarea>
 								</div>
 								<div class="form-group">
-									<label>Employe</label>
-									<select class="form-control" name="employe" id="employe" required>
+									<label>NIK</label>
+									<!-- <input class="form-control" type="text" name="nik" id="nik" placeholder="NIK" value="<?= set_value('emp_name');?>" required> -->
+
+									<select class="form-control" name="nik" id="nik" value="<?= set_value('nik');?>" required>
 									<option value="">Select..</option>
+									<?php foreach($employe as $emp):?>
+									<option value="<?= $emp->nik;?>"><?= $emp->nik;?></option>
+									<?php endforeach;?>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="" readonly>
+									<label>Employee</label>
+									<input class="form-control" type="text" name="emp_name" id="emp_name" placeholder="Employee" value="<?= set_value('emp_name');?>" readonly>
 								</div>
+								<input class="form-control" type="hidden" name="gender" id="gender" value="<?= set_value('gender');?>" readonly>
+								<div class="form-group">
+									<label>Department</label>
+									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= set_value('dept');?>" readonly>
+								</div>
+								<input class="form-control" type="hidden" name="branch" id="branch" value="<?= set_value('branch');?>" readonly>
 								<div class="form-group">
 									<label>Location</label>
-									<input class="form-control" type="text" name="location" id="location" placeholder="Location" value="" readonly>
+									<input class="form-control" type="text" name="location" id="location" placeholder="Location" value="<?= set_value('location');?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Quantity</label>
-									<input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" value="1" readonly>
+									<input class="form-control" type="text" name="qty" id="qty" placeholder="Quantity" value="1" readonly>
 								</div>
 								<div class="form-group">
 									<label>Unit</label>
-									<select class="form-control" name="unit" id="unit" required>
+									<select class="form-control" name="unit_id" id="unit_id" value="<?= set_value('unit_id');?>" required>
 									<option value="">Select..</option>
 									<?php foreach($unit as $unit):?>
 									<option value="<?= $unit->unit_id;?>"><?= $unit->unit;?></option>
 									<?php endforeach;?>
 									</select>
 								</div>
+								<input class="form-control" type="hidden" name="conditions" id="conditions" value="<?= set_value('conditions');?>" readonly>
+								<input class="form-control" type="hidden" name="status" id="status" value="<?= set_value('status');?>" readonly>
 								
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -157,7 +175,7 @@
 		<!-- end modal addUserAsset -->
 
 		<!-- modal editAsset -->
-		<?php $no = 0;
+		<!-- <?php $no = 0;
 			foreach($asset as $ass): $no++;?>
 		<div class="modal fade" id="editAssetModal<?= $ass->asset_id;?>" tabindex="-1" role="dialog" aria-labelledby="editAssetModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -233,5 +251,5 @@
 				</div>
 			</div>
 		</div>
-		<?php endforeach;?>
+		<?php endforeach;?> -->
 		<!-- end modal editAsset -->

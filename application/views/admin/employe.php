@@ -38,10 +38,10 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-					    <th width="20px">No</th>
+					    <th width="10px">No</th>
 						<th>NIK</th>
 						<th>Name</th>
-						<th width="70px">Image</th>
+						<th width="60px">Image</th>
 						<th>Gender</th>
 						<th>Birthday</th>
 						<th>Email</th>
@@ -126,7 +126,7 @@
 								</div>
 								<div class="form-group">
 									<label>Email</label>
-									<input class="form-control" type="email" name="email" id="email" placeholder="Email" value="<?= set_value('email');?>" required>
+									<input class="form-control" type="text" name="email" id="email" placeholder="Email" value="<?= set_value('email');?>" required>
 								</div>
 								<div class="form-group">
 									<label>Phone</label>
@@ -214,7 +214,7 @@
 								</div>
 								<div class="form-group">
 									<label>Email</label>
-									<input class="form-control" type="email" name="email" id="email" placeholder="Email" value="<?= $emp->email;?>" required>
+									<input class="form-control" type="text" name="email" id="email" placeholder="Email" value="<?= $emp->email;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Phone</label>

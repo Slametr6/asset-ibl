@@ -98,26 +98,54 @@
     <script src="<?= base_url('assets/');?>plugins/fastclick/fastclick.min.js"></script>
     <script src="<?= base_url('assets/');?>dist/js/app.min.js"></script>
     <script src="<?= base_url('assets/');?>dist/js/pages/dashboard.js"></script>
-		<script src="<?= base_url('assets/');?>dist/js/demo.js"></script>
-		<script>
-			function deleteConfirm(url){
-				$('#btn-delete').attr('href', url);
-				$('#deleteModal').modal();
-			}
-		</script>
-		<script>
-			function changePassword(url){
-				$('#btn-pass').attr('href', url);
-				$('#changePasswordModal').modal();
-			}
-		</script>
+	<script src="<?= base_url('assets/');?>dist/js/demo.js"></script>
+	<!-- <script src="<?= base_url('assets/');?>ajax.js"></script> -->
+	
+	<script>
+		function deleteConfirm(url){
+			$('#btn-delete').attr('href', url);
+			$('#deleteModal').modal();
+		}
+	</script>
+	
+	<script>
+		function changePassword(url){
+			$('#btn-pass').attr('href', url);
+			$('#changePasswordModal').modal();
+		}
+	</script>
+	
+	<script type="text/javascript">
+		$(".datepicker").datepicker({
+				format: 'yyyy-mm-dd',
+				autoclose: true,
+				todayHighlight: true,
+		});
+		</script> 
+		
 		<script type="text/javascript">
-			$(".datepicker").datepicker({
-					format: 'yyyy-mm-dd',
-					autoclose: true,
-					todayHighlight: true,
-			});
-			</script> 
+    	function autofill(){
+        var nik =document.getElementById('nik').value;
+        $.ajax({
+            url:"<?= base_url();?>index.php/employe/cariemp",
+            data:'&nik='+nik,
+            success:function(data){
+                var hasil = JSON.parse(data);  
+                     
+            		$.each(hasil, function(key,val){ 
+                 
+               		document.getElementById('nik').value=val.nik;
+                  document.getElementById('emp_name').value=val.emp_name;
+                  document.getElementById('gender').value=val.gender;
+                  document.getElementById('dept').value=val.dept;
+                  document.getElementById('branch').value=val.branch;
+                                
+                });
+            }
+        });
+                   
+    	}
+    </script>
 
   </body>
 </html>

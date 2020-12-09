@@ -38,6 +38,13 @@ class Employe extends CI_Controller {
 		
 	}
 
+	public function cariEmp()
+	{
+		$nik = $_GET['nik'];
+		$cariEmp = $this->m_employe->getEmpbyNik($nik)->result();
+		echo json_encode($cariEmp);
+	}
+
 	public function addEmploye()
 	{
 		$this->m_employe->checkEmployeId();

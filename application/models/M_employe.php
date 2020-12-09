@@ -18,6 +18,12 @@ class M_employe extends CI_Model {
 		}
 	}
 
+	public function getEmpbyNik($nik)
+	{
+		$query = $this->db->get_where('employees', ['nik' => $nik]);
+		return $query;
+	}
+
 	public function checkEmployeId()
 	{
 		$employe_id = $this->db->query('SELECT MAX(employe_id) as employe_code FROM employees')->row();
