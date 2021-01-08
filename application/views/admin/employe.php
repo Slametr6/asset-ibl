@@ -20,7 +20,7 @@
 								<i class="zmdi zmdi-plus"></i>Add employee
 							</button>
 						</div>
-						<div class="btn-group">
+						<!-- <div class="btn-group">
 							<button type="button" class="btn btn-default btn-md-right">Export</button>
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 								<span class="caret"></span>
@@ -30,7 +30,7 @@
 								<li><a href="#">PDF</a></li>
 								<li><a href="#">Excel</a></li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
                 </div><!-- /.box-header -->
 				<?= $this->session->userdata('message');?>
@@ -65,8 +65,8 @@
 						<td><?= $emp->email;?></td>
 						<td><?= $emp->phone;?></td>
 						<td><?= $emp->address;?></td>
-						<td><?= $emp->dept;?></td>
-						<td><?= $emp->branch;?></td>
+						<td><?= $emp->dept_id;?></td>
+						<td><?= $emp->branch_id;?></td>
 						<td>
 							<div class="table-data-feature">
 								<button class="item" title="Edit" data-toggle="modal" data-target="#addEmployeeModal<?= $emp->employe_id;?>" >
@@ -100,10 +100,7 @@
 					<div class="modal-body">
 						<div class="login-form">
 							<form action="<?= base_url('employe/addEmploye');?>" method="post">
-								<div class="form-group">
-									<label>Employee ID</label>
-									<input class="form-control" type="text" name="employe_code" id="employe_code" value="18<?= sprintf("%06s", $employe_id);?>" readonly>
-								</div>
+								<input class="form-control" type="hidden" name="employe_code" id="employe_code" value="18<?= sprintf("%06s", $employe_id);?>" readonly>
 								<div class="form-group">
 									<label>NIK</label>
 									<input class="form-control" type="text" name="nik" id="nik" placeholder="NIK" value="<?= set_value('nik');?>" required>
@@ -138,19 +135,19 @@
 								</div>
 								<div class="form-group">
 									<label>Department</label>
-									<select class="form-control" name="dept" id="dept" value="<?= set_value('dept');?>" required>
+									<select class="form-control" name="dept_id" id="dept_id" value="<?= set_value('dept_id');?>" required>
 										<option value="">Select..</option>
 										<?php foreach($dept as $val):?>
-										<option value="<?= $val->dept_id;?>"><?= $val->name;?></option>
+										<option value="<?= $val->dept_code;?>"><?= $val->name;?></option>
 					  					<?php endforeach;?>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Branch</label>
-									<select class="form-control" name="branch" id="branch" value="<?= set_value('branch');?>" required>
+									<select class="form-control" name="branch_id" id="branch_id" value="<?= set_value('branch_id');?>" required>
 										<option value="">Select..</option>
 										<?php foreach($branch as $val):?>
-										<option value="<?= $val->branch_id;?>"><?= $val->name;?></option>
+										<option value="<?= $val->branch_code;?>"><?= $val->name;?></option>
 					  					<?php endforeach;?>
 									</select>
 								</div>
@@ -226,19 +223,19 @@
 								</div>
 								<div class="form-group">
 									<label>Department</label>
-									<select class="form-control" name="dept" id="dept" required>
-										<option value="<?= $emp->dept_id;?>"><?= $emp->dept;?></option>
+									<select class="form-control" name="dept_id" id="dept_id" required>
+										<option value="<?= $emp->dept_code;?>"><?= $emp->dept_id;?></option>
 										<?php foreach($dept as $val):?>
-										<option value="<?= $val->dept_id;?>"><?= $val->name;?></option>
+										<option value="<?= $val->dept_code;?>"><?= $val->name;?></option>
 					  					<?php endforeach;?>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Branch</label>
-									<select class="form-control" name="branch" id="branch" required>
-										<option value="<?= $emp->branch_id;?>"> <?= $emp->branch;?></option>
+									<select class="form-control" name="branch_id" id="branch_id" required>
+										<option value="<?= $emp->branch_code;?>"> <?= $emp->branch_id;?></option>
 										<?php foreach($branch as $val):?>
-										<option value="<?= $val->branch_id;?>"><?= $val->name;?></option>
+										<option value="<?= $val->branch_code;?>"><?= $val->name;?></option>
 					  					<?php endforeach;?>
 									</select>
 								</div>

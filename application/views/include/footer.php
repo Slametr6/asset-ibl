@@ -60,8 +60,8 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-		<!-- jQuery 2.1.4 -->
-		<script src="<?= base_url('assets/');?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<!-- jQuery 2.1.4 -->
+	<script src="<?= base_url('assets/');?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- DataTables -->
     <script src="<?= base_url('assets/');?>plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?= base_url('assets/');?>plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -99,8 +99,8 @@
     <script src="<?= base_url('assets/');?>dist/js/app.min.js"></script>
     <script src="<?= base_url('assets/');?>dist/js/pages/dashboard.js"></script>
 	<script src="<?= base_url('assets/');?>dist/js/demo.js"></script>
-	<!-- <script src="<?= base_url('assets/');?>ajax.js"></script> -->
-	
+	<script src="sweetalert2.all.min.js"></script>
+
 	<script>
 		function deleteConfirm(url){
 			$('#btn-delete').attr('href', url);
@@ -121,31 +121,7 @@
 				autoclose: true,
 				todayHighlight: true,
 		});
-		</script> 
-		
-		<script type="text/javascript">
-    	function autofill(){
-        var nik =document.getElementById('nik').value;
-        $.ajax({
-            url:"<?= base_url();?>index.php/employe/cariemp",
-            data:'&nik='+nik,
-            success:function(data){
-                var hasil = JSON.parse(data);  
-                     
-            		$.each(hasil, function(key,val){ 
-                 
-               		document.getElementById('nik').value=val.nik;
-                  document.getElementById('emp_name').value=val.emp_name;
-                  document.getElementById('gender').value=val.gender;
-                  document.getElementById('dept').value=val.dept;
-                  document.getElementById('branch').value=val.branch;
-                                
-                });
-            }
-        });
-                   
-    	}
-    </script>
+	</script>
 
   </body>
 </html>

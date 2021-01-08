@@ -9,10 +9,10 @@ class Company extends CI_Controller {
 		$username = $this->session->userdata('username');
 		$user = $this->db->get_where('users', ['username' => $username])->row_array();
 
-		$checkId = $this->m_company->checkBranchId();
+		$checkId = $this->m_company->checkBranchCode();
 		$getId = substr($checkId, 3, 4);
 		$idNow = $getId+1;
-		$data = array('branch_id' => $idNow);
+		$data = array('branch_code' => $idNow);
 
 		if ($username == '') {
 			redirect('auth');
@@ -38,9 +38,9 @@ class Company extends CI_Controller {
 
 	public function addBranch()
 	{
-		$this->m_company->checkBranchId();
+		$this->m_company->checkBranchCode();
 		$data = [
-			'branch_id' => $this->input->post('branch_code'),
+			'branch_code' => $this->input->post('br_code'),
 			'name' => $this->input->post('name'),
 			'createdAt' => date('Y-m-d'),
 			'createdBy' => $this->session->userdata('username')
@@ -51,9 +51,9 @@ class Company extends CI_Controller {
 		redirect('company');
 	}
 
-	public function delBranch($id)
+	public function delBranch($branch_id)
 	{	
-		$this->m_company->delBranch($id);
+		$this->m_company->delBranch($branch_id);
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Branch deleted successfully!</div>');
 		redirect('company');
@@ -64,10 +64,10 @@ class Company extends CI_Controller {
 		$username = $this->session->userdata('username');
 		$user = $this->db->get_where('users', ['username' => $username])->row_array();
 
-		$checkId = $this->m_company->checkDeptId();
+		$checkId = $this->m_company->checkDeptCode();
 		$getId = substr($checkId, 4, 4);
 		$idNow = $getId+1;
-		$data = array('dept_id' => $idNow);
+		$data = array('dept_code' => $idNow);
 
 		if ($username == '') {
 			redirect('auth');
@@ -93,9 +93,9 @@ class Company extends CI_Controller {
 
 	public function addDept()
 	{
-		$this->m_company->checkDeptId();
+		$this->m_company->checkDeptCode();
 		$data = [
-			'dept_id' => $this->input->post('dept_code'),
+			'dept_code' => $this->input->post('dep_code'),
 			'name' => $this->input->post('name'),
 			'createdAt' => date('Y-m-d'),
 			'createdBy' => $this->session->userdata('username')
@@ -106,9 +106,9 @@ class Company extends CI_Controller {
 		redirect('company/dept');
 	}
 
-	public function delDept($id)
+	public function delDept($dept_id)
 	{	
-		$this->m_company->delDept($id);
+		$this->m_company->delDept($dept_id);
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Department deleted successfully!</div>');
 		redirect('company/dept');

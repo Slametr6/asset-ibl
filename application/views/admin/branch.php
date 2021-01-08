@@ -28,7 +28,7 @@
                     <thead>
                       <tr>
 					    <th width="20px">NO</th>
-						<th width="150px">Branch Id</th>
+						<th width="150px">Branch Code</th>
 						<th>Name</th>
 						<th width="80px">Action</th>
                       </tr>
@@ -38,12 +38,12 @@
 					  		foreach($branch as $val): $no++;?>
 					  <tr>
 	  					<td><?= $no;?></td>
-						<td><?= $val->branch_id;?></td>
+						<td><?= $val->branch_code;?></td>
 						<td><?= $val->name;?></td>
 						<td>
 							<div class="table-data-feature">
 								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('company/delbranch/'. $val->id);?>')" >
+									<a href="#!" onclick="deleteConfirm('<?= base_url('company/delbranch/'. $val->branch_id);?>')" >
 									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 							</div>
@@ -71,9 +71,9 @@
 						<div class="login-form">
 							<form action="<?= base_url('company/addBranch');?>" method="post">
 								<div class="form-group">
-									<label>Dept ID</label>
-									<input class="form-control" type="text" name="branch_code" id="branch_code" value="IBL<?php echo sprintf("%04s", $branch_id) ?>" readonly>
-									<?= form_error('branch_code','<small class="text-danger pl-3">','</small>');?>
+									<label>Branch Code</label>
+									<input class="form-control" type="text" name="br_code" id="br_code" value="IBL<?php echo sprintf("%04s", $branch_code) ?>" readonly>
+									<?= form_error('br_code','<small class="text-danger pl-3">','</small>');?>
 								</div>
 								<div class="form-group">
 									<label>Name</label>

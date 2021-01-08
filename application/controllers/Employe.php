@@ -38,13 +38,6 @@ class Employe extends CI_Controller {
 		
 	}
 
-	public function cariEmp()
-	{
-		$nik = $_GET['nik'];
-		$cariEmp = $this->m_employe->getEmpbyNik($nik)->result();
-		echo json_encode($cariEmp);
-	}
-
 	public function addEmploye()
 	{
 		$this->m_employe->checkEmployeId();
@@ -57,15 +50,15 @@ class Employe extends CI_Controller {
 			'email' => $this->input->post('email'),
 			'phone' => $this->input->post('phone'),
 			'address' => $this->input->post('address'),
-			'dept' => $this->input->post('dept'),
-			'branch' => $this->input->post('branch'),
+			'dept_id' => $this->input->post('dept_id'),
+			'branch_id' => $this->input->post('branch_id'),
 			'image' => 'avatar.png',
 			'createdAt' => date('Y-m-d'),
 			'createdBy' => $this->session->userdata('username')
 		];
 		$this->m_employe->save($data);
 
-		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Employe created successfully!</div>');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Employee created successfully!</div>');
 		redirect('employe');
 	}
 
@@ -107,8 +100,8 @@ class Employe extends CI_Controller {
 				'email' => htmlspecialchars($this->input->post('email', TRUE)),
 				'phone' => htmlspecialchars($this->input->post('phone', TRUE)),
 				'address' => htmlspecialchars($this->input->post('address', TRUE)),
-				'dept' => htmlspecialchars($this->input->post('dept', TRUE)),
-				'branch' => htmlspecialchars($this->input->post('branch', TRUE)),
+				'dept_id' => htmlspecialchars($this->input->post('dept_id', TRUE)),
+				'branch_id' => htmlspecialchars($this->input->post('branch_id', TRUE)),
 				'updatedat' => date('Y-m-d'),
 				'updatedby' => $username
 			];

@@ -28,7 +28,7 @@
                     <thead>
                       <tr>
 					    <th width="20px">No</th>
-						<th width="150px">Dept Id</th>
+						<th width="150px">Dept Code</th>
 						<th>Name</th>
 						<th width="80px">Action</th>
                       </tr>
@@ -38,12 +38,12 @@
 					  		foreach($dept as $val): $no++;?>
 					  <tr>
 					 	<td><?= $no;?></td>
-						<td><?= $val->dept_id;?></td>
+						<td><?= $val->dept_code;?></td>
 						<td><?= $val->name;?></td>
 						<td>
 							<div class="table-data-feature">
 								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('company/deldept/'. $val->id);?>')" >
+									<a href="#!" onclick="deleteConfirm('<?= base_url('company/deldept/'. $val->dept_id);?>')" >
 									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 							</div>
@@ -71,9 +71,9 @@
 						<div class="login-form">
 							<form action="<?= base_url('company/addDept');?>" method="post">
 								<div class="form-group">
-									<label>Dept ID</label>
-									<input class="form-control" type="text" name="dept_code" id="dept_code" value="DEPT<?= sprintf("%04s", $dept_id) ?>" readonly>
-									<?= form_error('dept_code','<small class="text-danger pl-3">','</small>');?>
+									<label>Dept Code</label>
+									<input class="form-control" type="text" name="dep_code" id="dep_code" value="DEPT<?= sprintf("%04s", $dept_code) ?>" readonly>
+									<?= form_error('dep_code','<small class="text-danger pl-3">','</small>');?>
 								</div>
 								<div class="form-group">
 									<label>Name</label>

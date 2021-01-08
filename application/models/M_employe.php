@@ -6,22 +6,16 @@ class M_employe extends CI_Model {
 
 	public function getEmploye($id = '')
 	{
-		$this->db->select('*, b.name as dept, c.name as branch')
+		$this->db->select('*, b.name as dept_id, c.name as branch_id')
 				->from('employees a')
-				->join('department b', 'b.dept_id = a.dept', 'inner')
-				->join('branch c', 'c.branch_id = a.branch', 'inner');
+				->join('department b', 'b.dept_code = a.dept_id', 'inner')
+				->join('branch c', 'c.branch_code = a.branch_id', 'inner');
 		$data = $this->db->get();
 		if ($id) {
 			return $data->row_array();
 		} else {
 			return $data->result();
 		}
-	}
-
-	public function getEmpbyNik($nik)
-	{
-		$query = $this->db->get_where('employees', ['nik' => $nik]);
-		return $query;
 	}
 
 	public function checkEmployeId()

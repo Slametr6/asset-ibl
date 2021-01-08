@@ -15,7 +15,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li class="">
-										<a href="#" ><i class="fa fa-cog"></i> Profile</a>
+										<a href="#!" onclick="changePassword('<?= base_url('admin/changePassword/'. $user['user_id']);?>')" ><i class="fa fa-key"></i> Change Password</a>
 										<a href="<?= base_url('auth/logout');?>" ><i class="fa fa-power-off"></i> Sign out</a>
                   </li>
                 </ul>
@@ -30,15 +30,14 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview"><a href="<?= base_url('user');?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
-						<li><a href="<?= base_url('product');?>"><i class="fa fa-list"></i> <span>Product</span></a></li>
 						<li class="treeview">
               <a href="#">
-                <i class="fa fa-book"></i> <span>Master Asset</span>
+                <i class="fa fa-database"></i> <span>Master Asset</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Assets</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> User Assets</a></li>
+                <li><a href="<?= base_url('asset');?>"><i class="fa fa-desktop"></i> Assets</a></li>
+                <li><a href="<?= base_url('asset/userasset');?>"><i class="fa fa-desktop"></i> User Assets</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -47,12 +46,12 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?= base_url('request');?>"><i class="fa fa-circle-o"></i> Request Form</a></li>
-                <li><a href="<?= base_url('returnn');?>"><i class="fa fa-circle-o"></i> Return Form</a></li>
+                <li><a href="<?= base_url('request');?>"><i class="fa fa-arrow-circle-right"></i> Request Form</a></li>
+                <li><a href="<?= base_url('returnn');?>"><i class="fa fa-arrow-circle-right"></i> Return Form</a></li>
               </ul>
 						</li>
             <li class="header">EXIT</li>
-            <li><a href="<?= base_url('auth/logout');?>"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
+            <li><a href="<?= base_url('auth/logout');?>"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
           </ul>
         </section>
       </aside>

@@ -80,14 +80,8 @@ class Auth extends CI_Controller {
 	{
 		$this->form_validation->set_rules('user', 'Full Name', 'trim|required');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[users.username]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|matches[password1]',[
-			'matches' => 'Password diferent!',
-			'min_length' => 'Password too short!'
-		]);
-		$this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[5]|matches[password]',[
-			'matches' => 'Password diferent!',
-			'min_length' => 'Password too short!'
-		]);
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|matches[password1]');
+		$this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[5]|matches[password]');
 		
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Username must be unique!</div>');
@@ -174,7 +168,7 @@ class Auth extends CI_Controller {
 		$user = $this->db->get_where('users', ['username' => $username])->row_array();
 		
 		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required');
-		$this->form_validation->set_rules('new_password1', 'New Password', 'trim|required|min_length[4]|matches[new_password2]');
+		$this->form_validation->set_rules('new_password1', 'New Password', 'trim|required|min_length[5]|matches[new_password2]');
 		$this->form_validation->set_rules('new_password2', 'Confirm Password', 'trim|required|matches[new_password1]');
 		
 		if ($this->form_validation->run() == FALSE) {

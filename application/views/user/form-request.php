@@ -34,11 +34,12 @@
 					</div>
                 </div><!-- /.box-header -->
 				<?= $this->session->userdata('message');?>
-                <div class="box-body">
+                <div class="box-body table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-						<th>Name of Employes</th>
+	  					<th width="20px">No</th>
+						<th>Employee</th>
 						<th>Department</th>
 						<th>Position</th>
 						<th>Product Name</th>
@@ -48,12 +49,14 @@
 						<th>Allocation</th>
 						<th>Note</th>
 						<th>Is approved</th>
-						<th>Action</th>
+						<th width="70px">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-					  <?php foreach($request as $val):?>
+					  <?php $no=0;
+					  		foreach($request as $val): $no++;?>
 					  <tr>
+						<td><?= $no;?></td>
 						<td><?= $val->name;?></td>
 						<td><?= $val->dept;?></td>
 						<td><?= $val->position;?></td>
@@ -66,15 +69,11 @@
 						<td><?= $val->is_approved;?></td>
 						<td>
 							<div class="table-data-feature">
-								<button class="item" title="Edit" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
-									<i class="fa fa-pencil"></i>
-								</button>
-								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('request/delrequest/'. $val->id);?>')">
-									<i class="fa fa-trash"></i></a>
+								<button class="item" title="Print" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
+									<i class="fa fa-print"></i>
 								</button>
 								<button class="item" title="Return" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
-									<i class="fa fa-exchange"></i>
+									<i class="fa fa-refresh" style="color:green"></i>
 								</button>
 							</div>
 						</td>
@@ -115,11 +114,21 @@
 								</div>
 								<div class="form-group">
 									<label>Product Name</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="">Select...</option>
+										<?php foreach($products as $prod):?>
+										<option value="<?= $prod->name;?>"><?= $prod->name;?></option>
+										<?php endforeach;?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" required>
+									<select class="form-control" type="text" name="vendor_name" id="vendor_name" required>
+										<option value="">Select...</option>
+										<?php foreach($products as $prod):?>
+										<option value="<?= $prod->description;?>"><?= $prod->description;?></option>
+										<?php endforeach;?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
@@ -153,74 +162,6 @@
 			</div>
 		</div>
 		<!-- end modal addRequest -->
-		
-		<!-- modal editRequest -->
-		<?php $no = 0;
-			foreach($request as $val): $no++;?>
-		<div class="modal fade" id="editRequestModal<?= $val->id;?>" tabindex="-1" role="dialog" aria-labelledby="editRequestModal" aria-hidden="true">
-			<div class="modal-dialog modal-md" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="editRequestModal">Edit Request</h4>
-					</div>
-					<div class="modal-body">
-						<div class="login-form">
-							<form action="<?= base_url('request/editrequest');?>" method="post">
-								<input type="hidden" name="id" id="id" value="<?= $val->id;?>" >
-								<div class="form-group">
-									<label>Name of Employe</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Position</label>
-									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Product Name</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" value="<?= $val->product_name;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" value="<?= $val->spec;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Brand</label>
-									<input class="form-control" type="text" name="brand" id="brand" placeholder="Brand" value="<?= $val->brand;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Quantity</label>
-									<input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" value="<?= $val->qty;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Allocation</label>
-									<input class="form-control" type="text" name="allocation" id="allocation" placeholder="Allocation" value="<?= $val->allocation;?>" required>
-								</div>
-								<div class="form-group">
-									<label>Note</label>
-									<select class="form-control" type="text" name="note" id="note" required>
-										<option value="<?= $val->note;?>"><?= $val->note;?></option>
-										<option value="New">New</option>
-										<option value="Replace">Replace</option>
-									</select>
-								</div>
-								
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary">Confirm</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php endforeach;?>
-		<!-- end modal editRequest -->
 		
 		<!-- modal editReturn -->
 		<?php $no = 0;

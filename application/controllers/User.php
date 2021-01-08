@@ -17,7 +17,17 @@ class User extends CI_Controller {
 		$data['title'] = 'User Profile';
 		$data['user'] = $user;
 		$data['dept'] = $this->m_company->getDept();
-		
+		$data['totalemp'] = $this->db->count_all_results('employees');
+		$data['totalasset'] = $this->db->count_all_results('assets');
+		$data['assetuse'] = $this->db->select('*')
+								->from('assets')
+								->like('status', 'in_use')
+								->count_all_results();
+		$data['notuse'] = $this->db->select('*')
+								->from('assets')
+								->like('status', 'not_use')
+								->count_all_results();
+										
 		$this->load->view('include/header', $data);
 		$this->load->view('include/user-sidebar', $data);
 		$this->load->view('user/index', $data);

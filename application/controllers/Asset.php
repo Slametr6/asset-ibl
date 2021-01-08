@@ -36,7 +36,9 @@ class Asset extends CI_Controller {
 				$data['title'] = 'Asset Managements';
 				$data['user'] = $user;
 				$data['asset'] = $this->m_asset->getAsset();
-				
+				$data['cat'] = $this->m_asset->getCat();
+				$data['location'] = $this->m_asset->getLocation();
+
 				$this->load->view('include/header', $data);
 				$this->load->view('include/user-sidebar', $data);
 				$this->load->view('user/asset', $data);
@@ -110,6 +112,7 @@ class Asset extends CI_Controller {
 				$data['title'] = 'User Asset Managements';
 				$data['user'] = $user;
 				$data['userasset'] = $this->m_asset->getUserAsset();
+				$data['unit'] = $this->m_asset->getUnit();
 				$data['asset'] = $this->m_asset->getAsset();
 				$data['employe'] = $this->m_employe->getEmploye();
 		
@@ -122,11 +125,14 @@ class Asset extends CI_Controller {
 				$data['menu'] = 'asset';
 				$data['title'] = 'Asset Managements';
 				$data['user'] = $user;
+				$data['userasset'] = $this->m_asset->getUserAsset();
+				$data['unit'] = $this->m_asset->getUnit();
 				$data['asset'] = $this->m_asset->getAsset();
+				$data['employe'] = $this->m_employe->getEmploye();
 				
 				$this->load->view('include/header', $data);
 				$this->load->view('include/user-sidebar', $data);
-				$this->load->view('user/asset', $data);
+				$this->load->view('user/user-asset', $data);
 				$this->load->view('include/footer');
 			}
 		}

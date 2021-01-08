@@ -107,10 +107,12 @@
 								<div class="form-group">
 									<label>Password</label>
 									<input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+									<?= form_error('password','<small class="text-danger pl-3">','</small>');?>
 								</div>
 								<div class="form-group">
 									<label>Confirm Password</label>
 									<input class="form-control" type="password" name="password1" id="password1" placeholder="Confirm Password" required>
+									<?= form_error('password1','<small class="text-danger pl-3">','</small>');?>
 								</div>
 								
 								<div class="modal-footer">
