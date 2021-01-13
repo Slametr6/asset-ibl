@@ -59,35 +59,4 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
-		<!-- modal addBranch -->
-		<div class="modal fade" id="addBranchModal" tabindex="-1" role="dialog" aria-labelledby="addBranchModal" aria-hidden="true">
-			<div class="modal-dialog modal-md" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="addBranchModal">Add Branch</h4>
-					</div>
-					<div class="modal-body">
-						<div class="login-form">
-							<form action="<?= base_url('company/addBranch');?>" method="post">
-								<div class="form-group">
-									<label>Branch Code</label>
-									<input class="form-control" type="text" name="br_code" id="br_code" value="IBL<?php echo sprintf("%04s", $branch_code) ?>" readonly>
-									<?= form_error('br_code','<small class="text-danger pl-3">','</small>');?>
-								</div>
-								<div class="form-group">
-									<label>Name</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Name" required>
-								</div>
-
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-									<button type="submit" class="btn btn-primary">Confirm</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end modal addBranch -->
+		
