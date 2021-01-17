@@ -27,8 +27,8 @@
 								<span class="sr-only">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">PDF</a></li>
-								<li><a href="#">Excel</a></li>
+								<li><a href="<?= base_url('auth/printPDF');?>" target="_blank">PDF</a></li>
+								<li><a href="<?= base_url('auth/exportExcel');?>">Excel</a></li>
 							</ul>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 									<a href="#!" onclick="deleteConfirm('<?= base_url('auth/deluser/'. $val->user_id);?>')" >
 									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
-								<button class="item" title="Reset" data-toggle="modal" data-target="#resetPasswordModal<?= $val->user_id;?>" >
+								<button class="item" title="Reset Password" data-toggle="modal" data-target="#resetPasswordModal<?= $val->user_id;?>" >
 									<i class="fa fa-key" style="color:blue"></i>
 								</button>
 							</div>
