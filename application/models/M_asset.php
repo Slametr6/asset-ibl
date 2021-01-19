@@ -6,16 +6,18 @@ class M_asset extends CI_Model {
 
 	public function getAsset($id = '')
 	{
+		$id = $this->input->post('asset_id');
 		$this->db->select('*, b.cat_name as category, c.description as location')
 				->from('assets a')
 				->join('category b', 'b.cat_id = a.category', 'inner')
 				->join('location c', 'c.location_id = a.location', 'inner');
 		$data = $this->db->get();
-		// echo json_encode($data);
 		if ($id) {
 			return $data->row_array();
+
 		} else {
 			return $data->result();
+
 		}
 	}
 	
@@ -42,10 +44,15 @@ class M_asset extends CI_Model {
 
 	public function getUserAsset($id = '')
 	{
-		$this->db->select('b.category as category, b.no_eq as no_eq, b.no_asset as no_asset, b.sn as sn, b.descript as descript, c.nik as nik, c.emp_name as emp_name, c.gender as gender, c.dept_id as dept, c.branch_id as branch, b.location as location, a.qty, a.unit_id, b.conditions as conditios, b.status as status')
+		$this->db->select('*, d.cat_name as category, b.no_eq, b.no_asset, b.sn, b.descript, c.nik, c.emp_name, c.gender, g.name as dept_id, f.name as branch_id, e.description as location, a.qty, h.unit as unitId ')
 				->from('user_asset a')
 				->join('assets b', 'b.no_eq = a.no_eq', 'inner')
-				->join('employees c', 'c.nik = a.nik', 'inner');
+				->join('employees c', 'c.nik = a.nik', 'inner')
+				->join('category d', 'd.cat_id = b.category', 'inner')
+				->join('location e', 'e.location_id = b.location', 'inner')
+				->join('branch f', 'f.branch_code = c.branch_id', 'inner')
+				->join('department g', 'g.dept_code = c.dept_id', 'inner')
+				->join('unit h', 'h.unit_id = a.unitId', 'inner');
 		$data = $this->db->get();
 		if ($id) {
 			return $data->row_array();

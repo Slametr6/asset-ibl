@@ -27,8 +27,8 @@
 								<span class="sr-only">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">PDF</a></li>
-								<li><a href="#">Excel</a></li>
+								<li><a href="<?= base_url('asset/printPDF');?>" target="_blank">PDF</a></li>
+								<li><a href="<?= base_url('asset/expExcel');?>">Excel</a></li>
 							</ul>
 						</div>
 					</div>
@@ -50,8 +50,6 @@
 						<th>Location</th>
 						<th>Qty</th>
 						<th>Unit</th>
-						<th>Condition</th>
-						<th>Status</th>
 						<th width="50px">Action</th>
                       </tr>
                     </thead>
@@ -66,20 +64,18 @@
 						<td><?= $val->sn;?></td>
 						<td><?= $val->descript;?></td>
 						<td><?= $val->emp_name;?></td>
-						<td><?= $val->dept;?></td>
-						<td><?= $val->branch;?></td>
+						<td><?= $val->dept_id;?></td>
+						<td><?= $val->branch_id;?></td>
 						<td><?= $val->location;?></td>
 						<td><?= $val->qty;?></td>
-						<td><?= $val->unit_id;?></td>
-						<td><?= $val->conditions;?></td>
-						<td><?= $val->status;?></td>
+						<td><?= $val->unit;?></td>
 						<td>
 							<div class="table-data-feature">
-								<button class="item" title="Edit" data-toggle="modal" data-target="#editAssetModal<?= $val->userasset_id;?>" >
+								<button class="item" title="Edit" data-toggle="modal" data-target="#editUserAssetModal<?= $val->userasset_id;?>" >
 									<i class="fa fa-pencil"></i>
 								</button>
 								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('asset/delasset/'. $val->userasset_id);?>')" >
+									<a href="#!" onclick="deleteConfirm('<?= base_url('asset/delUserAsset/'. $val->userasset_id);?>')" >
 									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 							</div>
@@ -108,32 +104,25 @@
 							<form action="<?= base_url('asset/adduserasset');?>" method="post">
 								<div class="form-group">
 									<label>No Equipment</label>
-									<input class="form-control" type="text" name="no_eq" id="no_eq" placeholder="No Equipment" value="<?= set_value('no_eq');?>" required>
+									<select class="form-control" name="no_eq" id="no_eq" value="<?= set_value('no_eq');?>" required>
+										<option value="">Select..</option>
+										<?php foreach($asset as $ass):?>
+										<option value="<?= $ass->no_eq;?>"><?= $ass->no_eq;?> - <?= $ass->category;?></option>
+										<?php endforeach;?>
+									</select>
 								</div>
-								<input class="form-control" type="hidden" name="category" id="category" value="<?= set_value('category');?>" readonly>
-								<input class="form-control" type="hidden" name="no_asset" id="no_asset" value="<?= set_value('no_asset');?>" readonly>
-								<input class="form-control" type="hidden" name="sn" id="sn" value="<?= set_value('sn');?>" readonly>
 								<div class="form-group">
 									<label>Description</label>
-									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" value="<?= set_value('descript');?>" readonly></textarea>
+									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" readonly></textarea>
 								</div>
 								<div class="form-group">
 									<label>NIK</label>
-									<input class="form-control" type="text" name="nik" id="nik" value="<?= set_value('nik');?>" onkeyup="fill_emp()" required>
-								</div>
-								<div class="form-group">
-									<label>Employee</label>
-									<input class="form-control" type="text" name="emp_name" id="emp_name" placeholder="Employee" value="<?= set_value('emp_name');?>" readonly>
-								</div>
-								<input class="form-control" type="hidden" name="gender" id="gender" value="<?= set_value('gender');?>" readonly>
-								<div class="form-group">
-									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= set_value('dept');?>" readonly>
-								</div>
-								<input class="form-control" type="hidden" name="branch" id="branch" value="<?= set_value('branch');?>" readonly>
-								<div class="form-group">
-									<label>Location</label>
-									<input class="form-control" type="text" name="location" id="location" placeholder="Location" value="<?= set_value('location');?>" readonly>
+									<select class="form-control" name="nik" id="nik" value="<?= set_value('nik');?>" required>
+										<option value="">Select..</option>
+										<?php foreach($employe as $emp):?>
+										<option value="<?= $emp->nik;?>"><?= $emp->nik;?> - <?= $emp->emp_name;?></option>
+										<?php endforeach;?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label>Quantity</label>
@@ -141,15 +130,13 @@
 								</div>
 								<div class="form-group">
 									<label>Unit</label>
-									<select class="form-control" name="unit_id" id="unit_id" value="<?= set_value('unit_id');?>" required>
+									<select class="form-control" name="unitId" id="unitId" value="<?= set_value('unitId');?>" required>
 										<option value="">Select..</option>
-										<?php foreach($unit as $unit):?>
+										<?php foreach($unitt as $unit):?>
 										<option value="<?= $unit->unit_id;?>"><?= $unit->unit;?></option>
 										<?php endforeach;?>
 									</select>
 								</div>
-								<input class="form-control" type="hidden" name="conditions" id="conditions" value="<?= set_value('conditions');?>" readonly>
-								<input class="form-control" type="hidden" name="status" id="status" value="<?= set_value('status');?>" readonly>
 								
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -162,3 +149,66 @@
 			</div>
 		</div>
 		<!-- end modal addUserAsset -->
+
+		<!-- modal editUserAsset -->
+		<?php $no = 0;
+			foreach($userasset as $val): $no++;?>
+		<div class="modal fade" id="editUserAssetModal<?= $val->userasset_id;?>" tabindex="-1" role="dialog" aria-labelledby="editUserAssetModal" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="editUserAssetModal">Edit User Asset</h4>
+					</div>
+					<div class="modal-body">
+						<div class="login-form">
+							<?= form_open_multipart('asset/edituserasset');?>
+								<input class="form-control" type="hidden" name="userasset_id" id="userasset_id" value="<?= $val->userasset_id;?>" required>
+								<div class="form-group">
+									<label>No Equipment</label>
+									<select class="form-control" name="no_eq" id="no_eq" required>
+										<option value="<?= $val->no_eq;?>"><?= $val->no_eq;?> - <?= $val->category;?></option>
+										<?php foreach($asset as $ass):?>
+										<option value="<?= $ass->no_eq;?>"><?= $ass->no_eq;?> - <?= $ass->category;?></option>
+										<?php endforeach;?>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Description</label>
+									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" readonly></textarea>
+								</div>
+								<div class="form-group">
+									<label>NIK</label>
+									<select class="form-control" name="nik" id="nik" required>
+										<option value="<?= $val->nik;?>"><?= $val->nik;?> - <?= $val->emp_name;?></option>
+										<?php foreach($employe as $emp):?>
+										<option value="<?= $emp->nik;?>"><?= $emp->nik;?> - <?= $emp->emp_name;?></option>
+										<?php endforeach;?>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Quantity</label>
+									<input class="form-control" type="text" name="qty" id="qty" placeholder="Quantity" value="1" readonly>
+								</div>
+								<div class="form-group">
+									<label>Unit</label>
+									<select class="form-control" name="unitId" id="unitId" required>
+										<option value="<?= $val->unit_id;?>"><?= $val->unit;?></option>
+										<?php foreach($unitt as $unt):?>
+										<option value="<?= $unt->unit_id;?>"><?= $unt->unit;?></option>
+										<?php endforeach;?>
+									</select>
+								</div>
+								
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+									<button type="submit" class="btn btn-primary">Confirm</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endforeach;?>
+		<!-- end modal editUserAsset -->

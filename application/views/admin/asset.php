@@ -98,7 +98,7 @@
 							<form action="<?= base_url('asset/addasset');?>" method="post">
 								<div class="form-group">
 									<label>Category</label>
-									<select class="form-control" name="cat_id" id="cat_id" value="<?= set_value('cat_id');?>" required>
+									<select class="form-control" name="category" id="category" value="<?= set_value('category');?>" required>
 										<option value="">Select..</option>
 										<?php foreach($cat as $c):?>
 										<option value="<?= $c->cat_id;?>"><?= $c->cat_name;?></option>
@@ -152,7 +152,7 @@
 								<div class="form-group">
 									<label>Category</label>
 									<select class="form-control" name="category" id="category" required>
-										<option value="<?= $ass->cat_id;?>"> <?= $ass->category;?></option>
+										<option value="<?= $ass->cat_id;?>"><?= $ass->category;?></option>
 										<?php foreach($cat as $val):?>
 										<option value="<?= $val->cat_id;?>"><?= $val->cat_name;?></option>
 					  					<?php endforeach;?>

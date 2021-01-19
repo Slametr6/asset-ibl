@@ -62,6 +62,8 @@
 
 	<!-- jQuery 2.1.4 -->
 	<script src="<?= base_url('assets/');?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script src="<?= base_url('assets/');?>plugins/jQuery/jQuery.js"></script>
+
     <!-- DataTables -->
     <script src="<?= base_url('assets/');?>plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?= base_url('assets/');?>plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -79,13 +81,8 @@
         });
       });
     </script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
     <script src="<?= base_url('assets/');?>bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="<?= base_url('assets/');?>plugins/morris/morris.min.js"></script>
     <script src="<?= base_url('assets/');?>plugins/sparkline/jquery.sparkline.min.js"></script>
     <script src="<?= base_url('assets/');?>plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="<?= base_url('assets/');?>plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
@@ -97,9 +94,8 @@
     <script src="<?= base_url('assets/');?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="<?= base_url('assets/');?>plugins/fastclick/fastclick.min.js"></script>
     <script src="<?= base_url('assets/');?>dist/js/app.min.js"></script>
-    <script src="<?= base_url('assets/');?>dist/js/pages/dashboard.js"></script>
 	<script src="<?= base_url('assets/');?>dist/js/demo.js"></script>
-	<script src="sweetalert2.all.min.js"></script>
+	<!-- <script src="sweetalert2.all.min.js"></script> -->
 
 	<script>
 		function deleteConfirm(url){
@@ -122,6 +118,30 @@
 				todayHighlight: true,
 		});
 	</script>
+
+	<script type="text/javascript">
+        $(document).ready(function(){
+             $('#no_eq').on('select, textareas',function(){
+                 
+                var no_eq=$(this).val();
+                $.ajax({
+                    type : "POST",
+                    url  : "<?= base_url('index.php/asset/get_Asset')?>",
+                    dataType : "JSON",
+                    data : {no_eq: no_eq},
+                    success: function(data){
+                        $.each(data,function(no_eq, descript){
+                            $('[name="descript"]').val(data.descript);
+							
+                        });
+                        
+                    }
+                });
+                return false;
+           });
+ 
+        });
+    </script>
 
   </body>
 </html>
