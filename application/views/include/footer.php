@@ -119,10 +119,9 @@
 		});
 	</script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
         $(document).ready(function(){
-             $('#no_eq').on('select, textareas',function(){
-                 
+            $('#no_eq').change(function(){
                 var no_eq=$(this).val();
                 $.ajax({
                     type : "POST",
@@ -132,16 +131,13 @@
                     success: function(data){
                         $.each(data,function(no_eq, descript){
                             $('[name="descript"]').val(data.descript);
-							
                         });
-                        
                     }
                 });
                 return false;
-           });
- 
+    		});
         });
-    </script>
+    </script> -->
 
-  </body>
+	</body>
 </html>

@@ -51,6 +51,7 @@ class Returnn extends CI_Controller {
 				'name' => $this->input->post('name'),
 				'dept' => $this->input->post('dept'),
 				'position' => $this->input->post('position'),
+				'material' => $this->input->post('material'),
 				'product_name' => $this->input->post('product_name'),
 				'spec' => $this->input->post('spec'),
 				'brand' => $this->input->post('brand'),
@@ -73,6 +74,7 @@ class Returnn extends CI_Controller {
 					'name' => $this->input->post('name'),
 					'dept' => $this->input->post('dept'),
 					'position' => $this->input->post('position'),
+					'material' => $this->input->post('material'),
 					'product_name' => $this->input->post('product_name'),
 					'spec' => $this->input->post('spec'),
 					'brand' => $this->input->post('brand'),
@@ -105,13 +107,17 @@ class Returnn extends CI_Controller {
 			'name' => $this->input->post('name'),
 			'dept' => $this->input->post('dept'),
 			'position' => $this->input->post('position'),
+			'material' => $this->input->post('material'),
 			'product_name' => $this->input->post('product_name'),
 			'spec' => $this->input->post('spec'),
 			'brand' => $this->input->post('brand'),
 			'qty' => $this->input->post('qty'),
 			'allocation' => $this->input->post('allocation'),
 			'note' => $this->input->post('note'),
-			'receiver' => $this->input->post('receiver')
+			'receiver' => $this->input->post('receiver'),
+			'is_accepted' => $this->input->post('is_accepted'),
+			'updatedAt' => date('Y-m-d'),
+			'updatedBy' => $this->session->userdata('username')
 		];
 		$id = $this->input->post('id');
 		$this->m_return->update($data, $id);

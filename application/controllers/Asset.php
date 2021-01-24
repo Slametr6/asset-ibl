@@ -35,7 +35,7 @@ class Asset extends CI_Controller {
 				$data['menu'] = 'asset';
 				$data['title'] = 'Asset Managements';
 				$data['user'] = $user;
-				$data['asset'] = $this->m_asset->getAsset();
+				$data['asset'] = $this->m_asset->getAssetbyStatus();
 				$data['cat'] = $this->m_asset->getCat();
 				$data['location'] = $this->m_asset->getLocation();
 
@@ -300,7 +300,9 @@ class Asset extends CI_Controller {
 				$data['userasset'] = $this->m_asset->getUserAsset();
 				$data['unitt'] = $this->m_asset->getUnit();
 				$data['asset'] = $this->m_asset->getAsset();
+				$data['notuse'] = $this->m_asset->getAssetbyStatus();
 				$data['employe'] = $this->m_employe->getEmploye();
+				$data['location'] = $this->m_asset->getLocation();
 		
 				$this->load->view('include/header', $data);
 				$this->load->view('include/sidebar', $data);
@@ -312,9 +314,10 @@ class Asset extends CI_Controller {
 				$data['title'] = 'User Asset Managements';
 				$data['user'] = $user;
 				$data['userasset'] = $this->m_asset->getUserAsset();
-				$data['unit'] = $this->m_asset->getUnit();
+				$data['unitt'] = $this->m_asset->getUnit();
 				$data['asset'] = $this->m_asset->getAsset();
 				$data['employe'] = $this->m_employe->getEmploye();
+				$data['location'] = $this->m_asset->getLocation();
 				
 				$this->load->view('include/header', $data);
 				$this->load->view('include/user-sidebar', $data);
@@ -337,12 +340,24 @@ class Asset extends CI_Controller {
 		];
 		$this->m_asset->saveUserAsset($data);
 
+		$no_eq = $this->input->post('no_eq');
+		$data1 = [
+			'status' => 'in_use',
+			'location' => $this->input->post('location'),
+			'createdAt' => date('Y-m-d'),
+			'createdBy' => $this->session->userdata('username')
+		];
+		$this->db->set($data1)
+				->where('no_eq', $no_eq)
+				->update('assets');
+
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User asset created successfully!</div>');
 		redirect('asset/userasset');
 	}
 
 	public function editUserAsset()
 	{
+		$id = $this->input->post('userasset_id');
 		$data = [
 			'no_eq' => $this->input->post('no_eq'),
 			'nik' => $this->input->post('nik'),
@@ -351,8 +366,17 @@ class Asset extends CI_Controller {
 			'updatedAt' => date('Y-m-d'),
 			'updatedBy' => $this->session->userdata('username')
 		];
-		$id = $this->input->post('userasset_id');
 		$this->m_asset->updateUserAsset($data, $id);
+
+		$no_eq = $this->input->post('no_eq');
+		$data1 = [
+			'location' => $this->input->post('location'),
+			'createdAt' => date('Y-m-d'),
+			'createdBy' => $this->session->userdata('username')
+		];
+		$this->db->set($data1)
+				->where('no_eq', $no_eq)
+				->update('assets');
 		
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User asset updated successfully!</div>');
 		redirect('asset/userasset');
@@ -462,7 +486,7 @@ class Asset extends CI_Controller {
 			$excel->setActiveSheetIndex(0)->setCellValue('I'.$numrow, $data->branch_id);
 			$excel->setActiveSheetIndex(0)->setCellValue('J'.$numrow, $data->location);
 			$excel->setActiveSheetIndex(0)->setCellValue('K'.$numrow, $data->qty);
-			$excel->setActiveSheetIndex(0)->setCellValue('L'.$numrow, $data->unit_id);
+			$excel->setActiveSheetIndex(0)->setCellValue('L'.$numrow, $data->unit);
 		
 		  // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
 			$excel->getActiveSheet()->getStyle('A'.$numrow)->applyFromArray($style_row);

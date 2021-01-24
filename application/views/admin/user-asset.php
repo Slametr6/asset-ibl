@@ -55,7 +55,7 @@
                     </thead>
                     <tbody>
 					  <?php $no=0;
-					 		foreach($userasset as $val): $no++;?>
+						foreach($userasset as $val): $no++;?>
 					  <tr>
 	  					<td><?= $no;?></td>
 						<td><?= $val->category;?></td>
@@ -106,14 +106,23 @@
 									<label>No Equipment</label>
 									<select class="form-control" name="no_eq" id="no_eq" value="<?= set_value('no_eq');?>" required>
 										<option value="">Select..</option>
-										<?php foreach($asset as $ass):?>
+										<?php foreach($notuse as $ass):?>
 										<option value="<?= $ass->no_eq;?>"><?= $ass->no_eq;?> - <?= $ass->category;?></option>
 										<?php endforeach;?>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Description</label>
-									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" readonly></textarea>
+									<input class="form-control" type="text" name="descript" id="descript" placeholder="Description" readonly>
+								</div>
+								<div class="form-group">
+									<label>Location</label>
+									<select class="form-control" name="location" id="location" value="<?= set_value('location');?>" required>
+										<option value="">Select..</option>
+										<?php foreach($location as $loc):?>
+										<option value="<?= $loc->location_id;?>"><?= $loc->description;?></option>
+					  					<?php endforeach;?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label>NIK</label>
@@ -173,9 +182,18 @@
 										<?php endforeach;?>
 									</select>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label>Description</label>
 									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" readonly></textarea>
+								</div> -->
+								<div class="form-group">
+									<label>Location</label>
+									<select class="form-control" name="location" id="location" required>
+										<option value="<?= $val->location_id;?>"> <?= $ass->location;?></option>
+										<?php foreach($location as $loc):?>
+										<option value="<?= $loc->location_id;?>"><?= $loc->description;?></option>
+					  					<?php endforeach;?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label>NIK</label>

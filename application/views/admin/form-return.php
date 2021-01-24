@@ -42,8 +42,9 @@
 						<th>Employee</th>
 						<th>Department</th>
 						<th>Position</th>
-						<th>Product Name</th>
-						<th>Specification</th>
+						<th>Material Name</th>
+						<th>Speck / Type</th>
+						<th>Description</th>
 						<th>Brand</th>
 						<th>Qty</th>
 						<th>Allocation</th>
@@ -61,6 +62,7 @@
 						<td><?= $val->name;?></td>
 						<td><?= $val->dept;?></td>
 						<td><?= $val->position;?></td>
+						<td><?= $val->material;?></td>
 						<td><?= $val->product_name;?></td>
 						<td><?= $val->spec;?></td>
 						<td><?= $val->brand;?></td>
@@ -68,7 +70,16 @@
 						<td><?= $val->allocation;?></td>
 						<td><?= $val->note;?></td>
 						<td><?= $val->receiver;?></td>
-						<td><?= $val->is_accepted;?></td>
+						<!-- <td><?= $val->is_accepted;?></td> -->
+						<td>
+							<form action="<?= base_url('request/editrequest/'. $val->id);?>" method="POST">
+								<select class="form-control" id="is_accepted" name="is_accepted">
+									<option value="<?= $val->is_accepted;?>"><?= $val->is_accepted;?></option>
+									<option value="0" <?php if($val->is_accepted == "0") echo 'selected="selected"';?> > 0</option>
+									<option value="1" <?php if($val->is_accepted == "1") echo 'selected="selected"';?> > 1</option>
+								</select>
+							</form>
+						</td>
 						<td>
 							<div class="table-data-feature">
 								<button class="item" title="Edit" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
@@ -116,12 +127,16 @@
 									<input class="form-control" type="text" name="position" id="position" placeholder="Position" required>
 								</div>
 								<div class="form-group">
-									<label>Product Name</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" required>
+									<label>Material Name</label>
+									<input class="form-control" type="text" name="material" id="material" placeholder="Material Name" required>
 								</div>
 								<div class="form-group">
-									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" required>
+									<label>Speck / Type</label>
+									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Speck / Type" required>
+								</div>
+								<div class="form-group">
+									<label>Description</label>
+									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" required></textarea>
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
@@ -137,11 +152,7 @@
 								</div>
 								<div class="form-group">
 									<label>Note</label>
-									<select class="form-control" type="text" name="note" id="note" required>
-										<option value="">Select...</option>
-										<option value="New">New</option>
-										<option value="Replace">Replace</option>
-									</select>
+									<textarea class="form-control" type="text" name="note" id="note" placeholder="Note" required></textarea>
 								</div>
 								<div class="form-group">
 									<label>Receiver</label>
@@ -187,12 +198,16 @@
 									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" required>
 								</div>
 								<div class="form-group">
-									<label>Product Name</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" value="<?= $val->product_name;?>" required>
+									<label>Material Name</label>
+									<input class="form-control" type="text" name="material" id="material" placeholder="Material Name" value="<?= $val->material;?>" required>
 								</div>
 								<div class="form-group">
-									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" value="<?= $val->spec;?>" required>
+									<label>Speck / Type</label>
+									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Speck / Type" value="<?= $val->product_name;?>" required>
+								</div>
+								<div class="form-group">
+									<label>Description</label>
+									<input class="form-control" type="text" name="spec" id="spec" placeholder="Description" value="<?= $val->spec;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
@@ -208,15 +223,19 @@
 								</div>
 								<div class="form-group">
 									<label>Note</label>
-									<select class="form-control" type="text" name="note" id="note" required>
-										<option value="<?= $val->note;?>"><?= $val->note;?></option>
-										<option value="New">New</option>
-										<option value="Replace">Replace</option>
-									</select>
+									<textarea class="form-control" type="text" name="note" id="note" placeholder="Note" required><?= $val->note;?></textarea>
 								</div>
 								<div class="form-group">
 									<label>Receiver</label>
 									<input class="form-control" type="text" name="receiver" id="receiver" placeholder="Receiver" value="<?= $val->receiver;?>" required>
+								</div>
+								<div class="form-group">
+									<label>Is accepted</label>
+									<select class="form-control" type="text" name="is_accepted" id="is_accepted" required>
+										<option value="<?= $val->is_accepted;?>"><?= $val->is_accepted;?></option>
+										<option value="1">1 - Accepted</option>
+										<option value="0">0 - Not Accept</option>
+									</select>
 								</div>
 								
 								<div class="modal-footer">

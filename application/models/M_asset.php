@@ -20,6 +20,18 @@ class M_asset extends CI_Model {
 
 		}
 	}
+
+	public function getAssetbyStatus()
+	{
+		$this->db->select('*, b.cat_name as category, c.description as location')
+				->from('assets a')
+				->join('category b', 'b.cat_id = a.category', 'inner')
+				->join('location c', 'c.location_id = a.location', 'inner')
+				->where('status', 'not_use');
+		$data = $this->db->get();
+		return $data->result();
+
+	}
 	
 	public function checkNoEq()
 	{
@@ -63,7 +75,9 @@ class M_asset extends CI_Model {
 
 	public function saveUserAsset($data)
 	{
+
 		return $this->db->insert('user_asset', $data);
+
 	}
 
 	public function updateUserAsset($data, $id)

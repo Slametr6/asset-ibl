@@ -1,7 +1,7 @@
-	  <header class="main-header">
-			<a href="#">
+			<header class="main-header">
+				<a href="<?= base_url('admin');?>">
           <img src="<?= base_url('assets/');?>images/icon/logoibl.png" />
-      </a>
+     	 </a>
         <nav class="navbar navbar-static-top" role="navigation">
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
@@ -14,9 +14,9 @@
                   <span class="hidden-xs"><?= $user['username'];?></span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="">
+                  <li class="dropdown">
 										<a href="#!" onclick="changePassword('<?= base_url('admin/changePassword/'. $user['user_id']);?>')" ><i class="fa fa-key"></i> Change Password</a>
-										<a href="<?= base_url('auth/logout');?>" ><i class="fa fa-power-off"></i> Sign out</a>
+										<a href="<?= base_url('auth/logout');?>" ><i class="fa fa-sign-out"></i> Sign out</a>
                   </li>
                 </ul>
               </li>
@@ -29,7 +29,7 @@
         <section class="sidebar">
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview"><a href="<?= base_url('user');?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></i></a></li>
+            <li class="active treeview"><a href="<?= base_url('user');?>"><i class="fa fa-dashboard"></i> <span>Home</span></i></a></li>
 						<li class="treeview">
               <a href="#">
                 <i class="fa fa-database"></i> <span>Master Asset</span>
@@ -42,7 +42,7 @@
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
+                <i class="fa fa-edit"></i> <span>Master Forms</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -51,7 +51,7 @@
               </ul>
 						</li>
             <li class="header">EXIT</li>
-            <li><a href="<?= base_url('auth/logout');?>"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+            <li><a href="<?= base_url('auth/logout');?>"><i class="fa fa-sign-out"></i> <span>Sign out</span></a></li>
           </ul>
         </section>
       </aside>

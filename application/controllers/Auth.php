@@ -244,14 +244,14 @@ class Auth extends CI_Controller {
 						->where('user_id', $id)
 						->update('users');
 
-			// var_dump($id, $password);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password has been reseted!</div>');
 			redirect('admin/user');
 
 		}
 	}
 
-	public function exportExcel(){
+	public function exportExcel()
+	{
 		// Load plugin PHPExcel nya
 		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 		
@@ -369,8 +369,8 @@ class Auth extends CI_Controller {
 		$write->save('php://output');
 	}
 	
-	public function printPDF(){
-
+	public function printPDF()
+	{
 		$tanggal = date('d-m-Y');
 		$pdf = new FPDF('P','mm','A4');
         // membuat halaman baru
