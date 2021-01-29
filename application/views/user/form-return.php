@@ -101,12 +101,16 @@
 									<input class="form-control" type="text" name="position" id="position" placeholder="Position" required>
 								</div>
 								<div class="form-group">
-									<label>Product Name</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Product Name" required>
+									<label>Material Name</label>
+									<input class="form-control" type="text" name="material" id="material" placeholder="Material Name" required>
 								</div>
 								<div class="form-group">
-									<label>Specification</label>
-									<input class="form-control" type="text" name="spec" id="spec" placeholder="Specification" required>
+									<label>Speck / Type</label>
+									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Speck / Type" required>
+								</div>
+								<div class="form-group">
+									<label>Description</label>
+									<textarea class="form-control" type="text" name="descript" id="descript" placeholder="Description" required></textarea>
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
@@ -122,11 +126,7 @@
 								</div>
 								<div class="form-group">
 									<label>Note</label>
-									<select class="form-control" type="text" name="note" id="note" required>
-										<option value="">Select...</option>
-										<option value="New">New</option>
-										<option value="Replace">Replace</option>
-									</select>
+									<textarea class="form-control" type="text" name="note" id="note" placeholder="Note" required></textarea>
 								</div>
 								<div class="form-group">
 									<label>Receiver</label>

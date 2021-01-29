@@ -10,7 +10,8 @@ class M_asset extends CI_Model {
 		$this->db->select('*, b.cat_name as category, c.description as location')
 				->from('assets a')
 				->join('category b', 'b.cat_id = a.category', 'inner')
-				->join('location c', 'c.location_id = a.location', 'inner');
+				->join('location c', 'c.location_id = a.location', 'inner')
+				->order_by('no_eq', 'DESC');
 		$data = $this->db->get();
 		if ($id) {
 			return $data->row_array();

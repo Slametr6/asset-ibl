@@ -70,8 +70,8 @@
 						<td><?= $val->allocation;?></td>
 						<td><?= $val->note;?></td>
 						<td><?= $val->receiver;?></td>
-						<!-- <td><?= $val->is_accepted;?></td> -->
-						<td>
+						<td><?= $val->is_accepted;?></td>
+						<!-- <td>
 							<form action="<?= base_url('request/editrequest/'. $val->id);?>" method="POST">
 								<select class="form-control" id="is_accepted" name="is_accepted">
 									<option value="<?= $val->is_accepted;?>"><?= $val->is_accepted;?></option>
@@ -79,7 +79,7 @@
 									<option value="1" <?php if($val->is_accepted == "1") echo 'selected="selected"';?> > 1</option>
 								</select>
 							</form>
-						</td>
+						</td> -->
 						<td>
 							<div class="table-data-feature">
 								<button class="item" title="Edit" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">

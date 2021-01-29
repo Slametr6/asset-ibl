@@ -107,14 +107,14 @@
 									<select class="form-control" name="no_eq" id="no_eq" value="<?= set_value('no_eq');?>" required>
 										<option value="">Select..</option>
 										<?php foreach($notuse as $ass):?>
-										<option value="<?= $ass->no_eq;?>"><?= $ass->no_eq;?> - <?= $ass->category;?></option>
+										<option value="<?= $ass->no_eq;?>"><?= $ass->no_eq;?> - <?= $ass->descript;?></option>
 										<?php endforeach;?>
 									</select>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label>Description</label>
 									<input class="form-control" type="text" name="descript" id="descript" placeholder="Description" readonly>
-								</div>
+								</div> -->
 								<div class="form-group">
 									<label>Location</label>
 									<select class="form-control" name="location" id="location" value="<?= set_value('location');?>" required>
@@ -125,11 +125,11 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label>NIK</label>
+									<label>User</label>
 									<select class="form-control" name="nik" id="nik" value="<?= set_value('nik');?>" required>
 										<option value="">Select..</option>
 										<?php foreach($employe as $emp):?>
-										<option value="<?= $emp->nik;?>"><?= $emp->nik;?> - <?= $emp->emp_name;?></option>
+										<option value="<?= $emp->nik;?>"><?= $emp->emp_name;?> - <?= $emp->nik;?></option>
 										<?php endforeach;?>
 									</select>
 								</div>

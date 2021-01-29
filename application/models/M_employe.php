@@ -9,7 +9,8 @@ class M_employe extends CI_Model {
 		$this->db->select('*, b.name as dept_id, c.name as branch_id')
 				->from('employees a')
 				->join('department b', 'b.dept_code = a.dept_id', 'inner')
-				->join('branch c', 'c.branch_code = a.branch_id', 'inner');
+				->join('branch c', 'c.branch_code = a.branch_id', 'inner')
+				->order_by('emp_name');
 		$data = $this->db->get();
 		if ($id) {
 			return $data->row_array();

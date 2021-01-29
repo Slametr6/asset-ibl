@@ -68,8 +68,8 @@
 						<td><?= $val->qty;?></td>
 						<td><?= $val->allocation;?></td>
 						<td><?= $val->note;?></td>
-						<!-- <td><?= $val->is_approved;?></td> -->
-						<td>
+						<td><?= $val->is_approved;?></td>
+						<!-- <td>
 							<form action="<?= base_url('request/editrequest/'. $val->id);?>" method="POST">
 								<select class="form-control" id="is_approved" name="is_approved">
 									<option value="<?= $val->is_approved;?>"><?= $val->is_approved;?></option>
@@ -77,7 +77,7 @@
 									<option value="1" <?php if($val->is_approved == "1") echo 'selected="selected"';?> > 1</option>
 								</select>
 							</form>
-						</td>
+						</td> -->
 						<td>
 							<div class="table-data-feature">
 								<button class="item" title="Edit" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
@@ -268,15 +268,15 @@
 								<input type="hidden" name="id" id="id" value="<?= $val->id;?>" >
 								<div class="form-group">
 									<label>Name of Employe</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" readonly>
+									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" readonly>
+									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" required>
 								</div>
 								<div class="form-group">
 									<label>Position</label>
-									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" readonly>
+									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" required>
 								</div
 								><div class="form-group">
 									<label>Material Name</label>
