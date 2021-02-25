@@ -42,9 +42,8 @@
 						<th>Employee</th>
 						<th>Department</th>
 						<th>Position</th>
-						<th>Material Name</th>
-						<th>Speck / Type</th>
-						<th>Description</th>
+						<th>Product Name</th>
+						<th>Specification</th>
 						<th>Brand</th>
 						<th>Qty</th>
 						<th>Allocation</th>
@@ -61,7 +60,6 @@
 						<td><?= $val->name;?></td>
 						<td><?= $val->dept;?></td>
 						<td><?= $val->position;?></td>
-						<td><?= $val->material;?></td>
 						<td><?= $val->product_name;?></td>
 						<td><?= $val->spec;?></td>
 						<td><?= $val->brand;?></td>
@@ -69,23 +67,13 @@
 						<td><?= $val->allocation;?></td>
 						<td><?= $val->note;?></td>
 						<td><?= $val->is_approved;?></td>
-						<!-- <td>
-							<form action="<?= base_url('request/editrequest/'. $val->id);?>" method="POST">
-								<select class="form-control" id="is_approved" name="is_approved">
-									<option value="<?= $val->is_approved;?>"><?= $val->is_approved;?></option>
-									<option value="0" <?php if($val->is_approved == "0") echo 'selected="selected"';?> > 0</option>
-									<option value="1" <?php if($val->is_approved == "1") echo 'selected="selected"';?> > 1</option>
-								</select>
-							</form>
-						</td> -->
 						<td>
 							<div class="table-data-feature">
+								<!-- <button class="item" title="Print" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
+									<i class="fa fa-print"></i>
+								</button> -->
 								<button class="item" title="Edit" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
 									<i class="fa fa-pencil"></i>
-								</button>
-								<button class="item" data-toggle="tooltip" title="Delete">
-									<a href="#!" onclick="deleteConfirm('<?= base_url('request/delrequest/'. $val->id);?>')">
-									<i class="fa fa-trash-o" style="color:red"></i></a>
 								</button>
 								<button class="item" title="Return" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
 									<i class="fa fa-refresh" style="color:green"></i>
@@ -171,7 +159,7 @@
 			</div>
 		</div>
 		<!-- end modal addRequest -->
-		
+
 		<!-- modal editRequest -->
 		<?php $no = 0;
 			foreach($request as $val): $no++;?>
@@ -188,43 +176,43 @@
 								<input type="hidden" name="id" id="id" value="<?= $val->id;?>" >
 								<div class="form-group">
 									<label>Name of Employe</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" required>
+									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" required>
+									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Position</label>
-									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" required>
+									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Material Name</label>
-									<input class="form-control" type="text" name="material" id="material" placeholder="Material Name" value="<?= $val->material;?>" required>
+									<input class="form-control" type="text" name="material" id="material" placeholder="Material Name" value="<?= $val->material;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Speck / Type</label>
-									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Speck / Type" value="<?= $val->product_name;?>" required>
+									<input class="form-control" type="text" name="product_name" id="product_name" placeholder="Speck / Type" value="<?= $val->product_name;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Description</label>
-									<textarea class="form-control" type="text" name="spec" id="spec" placeholder="Description" required><?= $val->spec;?></textarea>
+									<textarea class="form-control" type="text" name="spec" id="spec" placeholder="Description" readonly><?= $val->spec;?></textarea>
 								</div>
 								<div class="form-group">
 									<label>Brand</label>
-									<input class="form-control" type="text" name="brand" id="brand" placeholder="Brand" value="<?= $val->brand;?>" required>
+									<input class="form-control" type="text" name="brand" id="brand" placeholder="Brand" value="<?= $val->brand;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Quantity</label>
-									<input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" value="<?= $val->qty;?>" required>
+									<input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" value="<?= $val->qty;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Allocation</label>
-									<input class="form-control" type="text" name="allocation" id="allocation" placeholder="Allocation" value="<?= $val->allocation;?>" required>
+									<input class="form-control" type="text" name="allocation" id="allocation" placeholder="Allocation" value="<?= $val->allocation;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Note</label>
-									<select class="form-control" type="text" name="note" id="note" required>
+									<select class="form-control" type="text" name="note" id="note" readonly>
 										<option value="<?= $val->note;?>"><?= $val->note;?></option>
 										<option value="New">New</option>
 										<option value="Replace">Replace</option>
@@ -268,15 +256,15 @@
 								<input type="hidden" name="id" id="id" value="<?= $val->id;?>" >
 								<div class="form-group">
 									<label>Name of Employe</label>
-									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" required>
+									<input class="form-control" type="text" name="name" id="name" placeholder="Name of Employe" value="<?= $val->name;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Department</label>
-									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" required>
+									<input class="form-control" type="text" name="dept" id="dept" placeholder="Department" value="<?= $val->dept;?>" readonly>
 								</div>
 								<div class="form-group">
 									<label>Position</label>
-									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" required>
+									<input class="form-control" type="text" name="position" id="position" placeholder="Position" value="<?= $val->position;?>" readonly>
 								</div
 								><div class="form-group">
 									<label>Material Name</label>

@@ -15,7 +15,7 @@
               <div class="box">
                 <div class="box-header">
 				  <div class="margin">
-						<div class="btn-group">
+						<!-- <div class="btn-group">
 							<button type="button" class="btn btn-default btn-md-right">Export</button>
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 								<span class="caret"></span>
@@ -25,7 +25,7 @@
 								<li><a href="<?= base_url('asset/cetakPDF');?>" target="_blank">PDF</a></li>
 								<li><a href="<?= base_url('asset/exportExcel');?>">Excel</a></li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
                 </div><!-- /.box-header -->
 				<?= $this->session->userdata('message');?>

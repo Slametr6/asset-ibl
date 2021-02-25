@@ -15,7 +15,7 @@ class Admin extends CI_Controller {
 		} else {
 			if ($user['role_id'] == 1) {
 				$data['menu'] = 'home';
-				$data['title'] = 'Admin Panel';
+				$data['title'] = 'Admin Panel Management';
 				$data['user'] = $user;
 				$data['totalemp'] = $this->db->count_all_results('employees');
 				$data['totalasset'] = $this->db->count_all_results('assets');
@@ -33,7 +33,10 @@ class Admin extends CI_Controller {
 				$this->load->view('admin/index', $data);
 				$this->load->view('include/footer'); 
 				
-			} else {
+			} else if ($user['role_id'] == 3) {
+				redirect('user/manager');
+
+			}else {
 				redirect('user');
 			}
 		}
@@ -60,6 +63,9 @@ class Admin extends CI_Controller {
 				$this->load->view('include/sidebar', $data);
 				$this->load->view('admin/user', $data);
 				$this->load->view('include/footer'); 
+				
+			} else if ($user['role_id'] == 3) {
+				redirect('user/manager');
 				
 			} else {
 				redirect('user');

@@ -27,7 +27,7 @@
 								<span class="sr-only">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="<?= base_url('asset/cetakPDF');?>" target="_blank">PDF</a></li>
+								<!-- <li><a href="<?= base_url('asset/cetakPDF');?>" target="_blank">PDF</a></li> -->
 								<li><a href="<?= base_url('asset/exportExcel');?>">Excel</a></li>
 							</ul>
 						</div>

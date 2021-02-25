@@ -46,6 +46,9 @@ class Auth extends CI_Controller {
 					if ($user['role_id'] == 1) {
 						redirect('admin');
 
+					} else if  ($user['role_id'] == 3) {
+						redirect('user/manager');
+
 					} else {
 						redirect('user');
 					}
@@ -74,7 +77,6 @@ class Auth extends CI_Controller {
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Logout successfully</div>');
 		redirect('auth');
 	}
-
 	
 	public function addUser()
 	{
@@ -175,6 +177,9 @@ class Auth extends CI_Controller {
 			if($user['role_id'] == 1) {
 				redirect('admin');
 
+			} else if ($user['role_id'] == 3) {
+				redirect('user/manager');
+
 			} else {
 				redirect('user');
 			}
@@ -187,6 +192,10 @@ class Auth extends CI_Controller {
 					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
 					redirect('admin');
 	
+				} else if ($user['role_id'] == 3) {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
+					redirect('user/manager');
+
 				} else {
 					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
 					redirect('user');
@@ -199,6 +208,10 @@ class Auth extends CI_Controller {
 						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password must be diferent from current password!</div>');
 						redirect('admin');
 		
+					} else if ($user['role_id'] == 3) {
+						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password must be diferent from current password!</div>');
+						redirect('user/manager');
+
 					} else {
 						$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password must be diferent from current password!</div>');
 						redirect('user');
@@ -215,6 +228,10 @@ class Auth extends CI_Controller {
 					if($user['role_id'] == 1) {
 						$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed successfully</div>');
 						redirect('admin');
+
+					} else if($user['role_id'] == 3) {
+						$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed successfully</div>');
+						redirect('user/manager');
 
 					} else {
 						$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed successfully</div>');
