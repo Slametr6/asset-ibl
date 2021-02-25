@@ -58,9 +58,9 @@
 						<td><?= $val->is_approved;?></td>
 						<td>
 							<div class="table-data-feature">
-								<button class="item" title="Print" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
+								<!-- <button class="item" title="Print" data-toggle="modal" data-target="#editRequestModal<?= $val->id;?>">
 									<i class="fa fa-print"></i>
-								</button>
+								</button> -->
 								<button class="item" title="Return" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
 									<i class="fa fa-refresh" style="color:green"></i>
 								</button>

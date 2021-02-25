@@ -39,7 +39,7 @@
 						<th>Note</th>
 						<th>Receiver</th>
 						<th>Is accepted</th>
-						<th>Action</th>
+						<!-- <th>Action</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -58,13 +58,13 @@
 						<td><?= $val->note;?></td>
 						<td><?= $val->receiver;?></td>
 						<td><?= $val->is_accepted;?></td>
-						<td>
+						<!-- <td>
 							<div class="table-data-feature">
 								<button class="item" title="Print" data-toggle="modal" data-target="#editReturnModal<?= $val->id;?>">
 									<i class="fa fa-print"></i>
 								</button>
 							</div>
-						</td>
+						</td> -->
 					  </tr>
 					  <?php endforeach;?>
                 	</tbody>
