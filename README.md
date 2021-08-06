@@ -11,8 +11,7 @@ Berikut merupakan tampilan program yang dibuat.
 # Tampilan Dashboard
 ![image](https://user-images.githubusercontent.com/53107522/128450183-711bc02f-0c6d-4a81-8ff9-da02d75cd593.png)
 
-Aplikasi ini masih jauh dari kesempurnaan, maka dari itu dipersilahkan undtuk di kembangkan dan dipergunakan sebagaimana mestinya.
-Terimakasih banyak.
+Aplikasi ini masih jauh dari kesempurnaan, maka dari itu dipersilahkan untuk di kembangkan dan dipergunakan sebagaimana mestinya. Terimakasih banyak.
 
 Saran dan masukan yang membangun diharapkan untuk perbaikan kedepannya :
 Mail : slametr6@gmail.com, 
