@@ -6,7 +6,7 @@ Aplikasi Asset-IBL (Asset-Iron Bird Logistics) ini merupakan aplikasi yang dibua
 Berikut merupakan tampilan program yang dibuat.
 
 # Tampilan Login
-![image](https://user-images.githubusercontent.com/53107522/128450126-ac81b36d-c4f1-43b8-8727-5af2f9d41bce.png)
+![image](https://user-images.githubusercontent.com/53107522/128481159-38b84960-6884-48eb-b876-e71824cb21de.png)
 
 # Tampilan Dashboard
 ![image](https://user-images.githubusercontent.com/53107522/128450183-711bc02f-0c6d-4a81-8ff9-da02d75cd593.png)
