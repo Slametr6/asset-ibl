@@ -13,6 +13,6 @@ Aplikasi ini masih jauh dari kesempurnaan, maka dari itu dipersilahkan undtuk di
 Terimakasih banyak.
 
 Saran dan masukan yang membangun diharapkan untuk perbaikan kedepannya :
-IG : @slametr6
+Mail : slametr6@gmail.com, 
+IG : @slametr6, 
 Linkedin : https://www.linkedin.com/in/slamet-riyadi-7b13b5162/
-Mail : slametr6@gmail.com
