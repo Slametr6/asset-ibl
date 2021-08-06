@@ -1,5 +1,5 @@
 # asset-ibl
-![logoibl](https://user-images.githubusercontent.com/53107522/128449373-11eaca0e-6c4b-4cdd-8786-3bcd14f6f39f.png)
+**Aplikasi Inventaris IT PT. Iron Bird**
 
 PT Iron Bird merupakan bagian dari perusahaan Blue Bird yang bergerak dibidang Logistics.
 Aplikasi Asset-IBL (Asset-Iron Bird Logistics) ini merupakan aplikasi yang dibuat untuk merekap data-data inventaris IT yang digunakan oleh perusahaan tersebut.
